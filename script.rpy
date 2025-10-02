@@ -318,7 +318,7 @@ label blocked_by_mido:
     if not has_sword or not has_shield:
         mido "You can't go see the Great Deku Tree without proper equipment! Come back when you have a sword and shield!"
     
-    link "But Mido—"
+    link "But Mido..."
     
     mido "No buts! Those are the rules. Even if the Great Deku Tree summoned you, you need to be prepared!"
     
@@ -742,7 +742,7 @@ label hyrule_field_first_time:
     
     link "Wow... it's so big! I've never seen anything like this!"
     
-    navi "This is Hyrule Field, Link! And look—there's Hyrule Castle Town in the distance!"
+    navi "This is Hyrule Field, Link! And look, there's Hyrule Castle Town in the distance!"
     
     show kaepora at midcenter
     with dissolve
@@ -761,7 +761,7 @@ label hyrule_field_first_time:
     
     link "Yes! Do you know where I can find her?"
     
-    kaepora "She resides in Hyrule Castle. But be warned—a man with evil intentions also seeks an audience with the King."
+    kaepora "She resides in Hyrule Castle. But be warned, a man with evil intentions also seeks an audience with the King."
     
     kaepora "His name is Ganondorf, the Gerudo King. Do not trust him!"
     
@@ -826,7 +826,7 @@ label hyrule_castle_approach:
     
     zelda "Link, I'll explain. A man named Ganondorf has sworn loyalty to my father, but I don't trust him."
     
-    zelda "He seeks the Triforce—a sacred treasure that grants the wishes of whoever touches it."
+    zelda "He seeks the Triforce. A sacred treasure that grants the wishes of whoever touches it."
     
     zelda "In my dreams, I saw Ganondorf standing over Hyrule, covered in darkness. And I saw you standing against him."
     
@@ -889,7 +889,7 @@ label hyrule_field_hub:
     
     play music "audio/hyrule_field_theme.mp3" if_changed
     
-    show link child
+    show link child at midleft
     show navi at naviright
     
     menu:
@@ -1026,7 +1026,7 @@ label death_mountain_approach:
     
     play sound "audio/door_open.mp3"
     
-    darunia "What the—! That song! It reminds me of my old friend from the forest!"
+    darunia "What the! That song! It reminds me of my old friend from the forest!"
     
     "Darunia begins dancing joyfully!"
     
@@ -1055,7 +1055,7 @@ label death_mountain_approach:
             link "What kind of dragon is it? What should I expect?"
             darunia "It's called King Dodongo. A massive beast with armor-like skin. Its roar alone can shake the mountain!"
     
-    darunia "If you can defeat King Dodongo and open the cavern, I'll give you our most precious treasure—the Goron's Ruby!"
+    darunia "If you can defeat King Dodongo and open the cavern, I'll give you our most precious treasure, the Goron's Ruby!"
     
     link "I'll do it! Where is Dodongo's Cavern?"
     
@@ -1230,7 +1230,7 @@ label dodongo_defeated:
     
     darunia "I know you will, Brother. The Gorons will never forget what you've done for us!"
     
-    navi "Link! We still need one more Spiritual Stone—the Zora's Sapphire!"
+    navi "Link! We still need one more Spiritual Stone, the Zora's Sapphire!"
     
     link "You're right. Let's head to Zora's Domain!"
     
@@ -1361,7 +1361,7 @@ label inside_jabu_jabu:
     
     navi "Carry you?!"
     
-    ruto "Yes! Now let's go! And watch your step—you're carrying a princess!"
+    ruto "Yes! Now let's go! And watch your step, you're carrying a princess!"
     
     "Link reluctantly carries Princess Ruto through the dungeon..."
     
@@ -1718,7 +1718,7 @@ label temple_of_time_first:
     
     rauru "Link... seven years have passed in the world outside."
     
-    "Link looks down at his hands—they're larger, adult hands..."
+    "Link looks down at his hands, they're larger, adult hands..."
     
     rauru "Ganondorf followed you into the Sacred Realm and took the Triforce... or part of it."
     
@@ -1873,7 +1873,7 @@ label forest_temple_approach:
     scene bg kokiri_forest
     with fade
     
-    play music "audio/kokiri_forest_theme.mp3" if_changed
+    play music "audio/inside_deku_tree.mp3" if_changed
     
     show link adult
     
@@ -1884,6 +1884,14 @@ label forest_temple_approach:
     show navi at naviright
     
     navi "The forest... it's suffering under Ganondorf's curse!"
+
+    link "Why is everything a monster here?"
+
+    link "What happened to all my friends?."
+
+    navi "Link..."
+
+    link "..."
     
     link "We have to save it. Let's find the Forest Temple."
     
@@ -2044,6 +2052,8 @@ label phantom_ganon_defeated:
     
     "A pillar of green light appears..."
     
+    hide navi
+
     show saria_sprite at midright
     with dissolve
     
@@ -2070,7 +2080,7 @@ label phantom_ganon_defeated:
     
     saria "Link... I'll always be your friend. No matter what happens."
     
-    link "Thank you, Saria. I'll finish this—I promise."
+    link "Thank you, Saria. I'll finish this, I promise."
     
     hide saria_sprite
     
@@ -2154,7 +2164,7 @@ label fire_temple_approach:
     show link adult
     show navi at naviright
     
-    navi "The Fire Temple! Be careful, Link—it's even hotter than before!"
+    navi "The Fire Temple! Be careful, Link, it's even hotter than before!"
     
     "Link explores the temple..."
     
@@ -2341,7 +2351,7 @@ label water_temple_approach:
     
     sheik "You'll need the Iron Boots to sink to the bottom. I sense you already have them."
     
-    sheik "Learn this song—it will help you control the water."
+    sheik "Learn this song, it will help you control the water."
     
     play sound "audio/serenade_of_water.mp3"
     
@@ -2794,7 +2804,7 @@ label spirit_temple_approach:
     show link adult
     show navi at naviright
     
-    navi "The desert! This is it—the final temple!"
+    navi "The desert! This is it, the final temple!"
     
     "Link travels across the desert to the Spirit Temple..."
     
@@ -2809,7 +2819,7 @@ label spirit_temple_approach:
     
     show navi at naviright
     
-    navi "The Spirit Temple! But look—it has areas only a child can enter!"
+    navi "The Spirit Temple! But look, it has areas only a child can enter!"
     
     show link adult at midleft
     with dissolve
@@ -2885,12 +2895,12 @@ label boss_twinrova:
     show twinrova
     with dissolve
     
-    "Two witches appear—one surrounds herself in fire, the other in ice!"
+    "Two witches appear, one surrounds herself in fire, the other in ice!"
     
     show link adult at midleft
     show navi at naviright
     
-    navi "Kotake and Koume—the Twinrova witches! They serve Ganondorf!"
+    navi "Kotake and Koume, the Twinrova witches! They serve Ganondorf!"
     
     $ twinrova_health = 3
     
@@ -2983,7 +2993,9 @@ label twinrova_defeated:
     show navi at naviright
     
     navi "We did it! All the temples are complete!"
-    
+
+    play music "audio/gerudo_valley_theme.mp3"
+
     call item_get("Heart Container", "item_heart_container")
     
     "A pillar of orange light appears..."
@@ -3071,7 +3083,7 @@ label ganon_castle_approach:
     show link adult
     show navi at naviright
     
-    navi "There it is—Ganondorf's Castle! This is it, Link!"
+    navi "There it is, Ganondorf's Castle! This is it, Link!"
     
     link "Seven years I've waited for this moment. Let's end this!"
     
@@ -3304,7 +3316,6 @@ label castle_escape:
     
     "Link and Zelda burst through the castle entrance just as it collapses behind them!"
     
-    scene bg hyrule_field
     with fade
     
     show link adult at midleft
@@ -3331,13 +3342,13 @@ label castle_escape:
     
     ganondorf "YOU... HAVE NOT... WON!"
     
-    scene bg hyrule_field
+    scene bg final_battle
     with fade
     
     show ganon
     with dissolve
     
-    "A massive beast emerges from the ruins—Ganon, the Demon King!"
+    "A massive beast emerges from the ruins, Ganon, the Demon King!"
     
     show link adult at midleft
     show zelda adult at midright
@@ -3359,7 +3370,7 @@ label castle_escape:
     jump final_boss_ganon
 
 label final_boss_ganon:
-    scene bg hyrule_field
+    scene bg final_battle
     with fade
     
     play music "audio/ganondorf_battle.mp3" if_changed
@@ -3444,7 +3455,9 @@ label ganon_battle:
             jump ganon_battle
 
 label ganon_final_defeated:
+    scene bg final_battle
     play sound "audio/enemy_defeat.mp3"
+    play music "audio/ganondorf_battle.mp3" if_changed
     
     "Ganon falls to his knees, weakened!"
     
@@ -3457,16 +3470,26 @@ label ganon_final_defeated:
         zelda "Strike him down with the Master Sword!"
         
         "Finish Ganon":
-            play sound "audio/master_sword_finisher.mp3"
-            "Link charges forward and plunges the Master Sword into Ganon!"
+            hide link adult with dissolve
+            hide zelda adult with dissolve
+            show bg black
+            with dissolve
+            pause 1
+            $ renpy.movie_cutscene("videos/oot_ganon_defeated.webm")
+
+            scene bg final_battle
+            play music "audio/ganondorf_battle.mp3" if_changed
             
             "Ganon lets out a final roar!"
+
+            show ganondorf_sprite at midleft
+            with dissolve
+            show zelda adult at midright
+            with dissolve
             
             ganondorf "You... you have only delayed my return... I will... rise again..."
             
-            hide ganon
-            
-            zelda "Sages! Now!"
+            zelda "6 Sages! Now!"
             
             play sound "audio/sage_power.mp3"
             
@@ -3476,14 +3499,24 @@ label ganon_final_defeated:
             
             zelda "Ganon, the Evil King... In the name of the Six Sages, I command you to be sealed away!"
             
-            play sound "audio/seal.mp3"
-            
+            hide ganondorf_sprite with dissolve
+            hide zelda adult with dissolve
+            show bg black
+            with dissolve
+            pause 1
+            $ renpy.movie_cutscene("videos/oot_zelda_call.webm")
+            $ renpy.movie_cutscene("videos/oot_ganon_sealed.webm")
+            stop music
+
+            scene bg black
+
             "Ganon is pulled into the portal and sealed in the Sacred Realm!"
             
             scene bg black
             with fade
             
             jump ending
+
 
 label ending:
     scene bg hyrule_field
@@ -3617,11 +3650,15 @@ label ending:
     
     link "Yeah... let's do that."
     
-    "Link looks up at the sky, where he knows—in another time, another world—he stood as a hero."
+    "Link looks up at the sky, where he knows, in another time, another world, he stood as a hero."
     
     "But here, now, he is just a boy in the forest."
     
     "And for the moment, that's enough."
+
+    jump ending_final
+
+label ending_final:
     
     scene bg black
     with fade
@@ -3641,9 +3678,24 @@ label ending:
     "A tale of courage, wisdom, and power..."
     
     show expression VBox(
-        Text("The Legend of Zelda: Ocarina of Time", size=60, xalign=0.5),
-        Text("Visual Novel Edition", size=36, xalign=0.5),
+        Text("The End", size=60, xalign=0.5),
         spacing=20
-    ) at truecenter with dissolve
+    ) as the_end at truecenter with dissolve
+    pause 3
+
+    show expression VBox(
+        Text("Original Game Developed by Nintendo (1998)", size=60, xalign=0.5),
+        spacing=20
+    ) as the_end at truecenter with dissolve
+    pause 3
+
+    show expression VBox(
+        Text("Thanks for Playing!", size=60, xalign=0.5),
+        spacing=20
+    ) as the_end at truecenter with dissolve
+    pause 3
+    
+    hide the_end
+    with dissolve
     
     return
