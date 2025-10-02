@@ -14,6 +14,8 @@ define ganondorf = Character("Ganondorf", color="#8b0000")
 define talon = Character("Talon", color="#daa520")
 define malon = Character("Malon", color="#ff6347")
 define kaepora = Character("Kaepora Gaebora", color="#cd853f")
+define nabooru = Character("Nabooru", color="#ff4500")
+define king_zoora = Character("King Zora", color="#3f61ed")
 
 # Images
 image link child = Transform("link/child.png", xalign=0.5, yalign=0.5, zoom=0.5)
@@ -39,6 +41,11 @@ image bongo_bongo = Transform("bongo_bongo/bongo_bongo.webp", xalign=0.5, yalign
 image twinrova = Transform("twinrova/twinrova.webp", xalign=0.5, yalign=0.5, zoom=0.7)
 image ganon = Transform("ganon/ganon.webp", xalign=0.5, yalign=0.5, zoom=0.8)
 image kaepora = Transform("kaepora/kaepora.webp", xalign=0.5, yalign=0.5, zoom=0.4)
+image nabooru = Transform("nabooru/nabooru.webp", xalign=0.5, yalign=0.5, zoom=0.2)
+image king_zora = Transform("king_zora/king_zora.webp", xalign=0.5, yalign=0.5, zoom=0.3)
+image malon = Transform("malon/malon.png", xalign=0.5, yalign=0.5, zoom=0.45)
+image rauru = Transform("rauru/rauru.webp", xalign=0.5, yalign=0.5, zoom=0.2)
+image talon = Transform("talon/talon.webp", xalign=0.5, yalign=0.5, zoom=0.4)
 
 # Backgrounds
 image bg kokiri_forest = Transform("backgrounds/kokiri_forest.jpg", fit="cover")
@@ -1237,15 +1244,15 @@ label zora_domain_approach:
     
     "Link is escorted to the throne room..."
     
-    "King Zora" "Hmm? You're not my daughter... Where is Princess Ruto?!"
+    king_zora "Hmm? You're not my daughter... Where is Princess Ruto?!"
     
     show navi at naviright
     
     navi "Princess Ruto? We haven't seen her!"
     
-    "King Zora" "She went inside Lord Jabu-Jabu and hasn't returned! Something must be wrong!"
+    king_zora "She went inside Lord Jabu-Jabu and hasn't returned! Something must be wrong!"
     
-    "King Zora" "Please, young hero! Find my daughter! She's all I have!"
+    king_zora "Please, young hero! Find my daughter! She's all I have!"
     
     link "Don't worry! I'll find her!"
     
@@ -1451,7 +1458,7 @@ label barinade_defeated:
     scene bg zora_domain
     with fade
     
-    "King Zora" "My daughter! You're safe! Thank you, young hero!"
+    king_zora "My daughter! You're safe! Thank you, young hero!"
     
     show link child
     show navi at naviright
@@ -2914,11 +2921,11 @@ label twinrova_defeated:
     
     "A mysterious figure appears in the light..."
     
-    "Nabooru" "Link... thank you for freeing me from the Twinrova's control."
+    nabooru "Link... thank you for freeing me from the Twinrova's control."
     
     link "Who are you?"
     
-    "Nabooru" "I am Nabooru, second-in-command of the Gerudo thieves. And now... the Sage of Spirit."
+    nabooru "I am Nabooru, second-in-command of the Gerudo thieves. And now... the Sage of Spirit."
     
     play sound "audio/sage_awakening.mp3"
     
@@ -2926,9 +2933,9 @@ label twinrova_defeated:
     
     call item_get("Spirit Medallion", "item_spirit_medallion")
     
-    "Nabooru" "All six Sages are now awakened, Link. It's time to face Ganondorf!"
+    nabooru "All six Sages are now awakened, Link. It's time to face Ganondorf!"
     
-    "Nabooru" "Go to the Temple of Time. The other Sages will meet you there."
+    nabooru "Go to the Temple of Time. The other Sages will meet you there."
     
     link "Thank you! I'll end this once and for all!"
     
@@ -2961,7 +2968,7 @@ label all_sages_gathered:
     
     "Impa" "The Princess is waiting for you, Link!"
     
-    "Nabooru" "Show Ganondorf what true courage looks like!"
+    nabooru "Show Ganondorf what true courage looks like!"
     
     rauru "Link, we will create a bridge to Ganondorf's Castle. Use the power of the Six Sages to break his barrier!"
     
