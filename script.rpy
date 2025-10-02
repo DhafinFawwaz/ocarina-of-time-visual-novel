@@ -99,7 +99,7 @@ image item_mirror_shield = Transform("items/mirror_shield.webp", zoom=1.2)
 image item_light_arrows = Transform("items/light_arrows.webp", zoom=1)
 
 label item_get(item_name, item_image):
-    play sound "audio/item_get.mp3"
+    play sound "sound/item_get.mp3"
     show item_popup_bg with dissolve
     show expression Transform(item_image, xalign=0.5, yalign=0.28, zoom=0.6) as item_display with dissolve
     show expression VBox(
@@ -623,7 +623,6 @@ label gohma_defeated:
     
     deku "But now, your true destiny calls. You must go to Hyrule Castle and speak with Princess Zelda."
     
-    play sound "audio/item_get.mp3"
     call item_get("Kokiri Emerald", "item_kokiri_emerald")
     
     deku "This is the Spiritual Stone of the Forest. Guard it well... It is one of three keys to the Sacred Realm."
@@ -1162,7 +1161,6 @@ label dodongo_defeated:
     
     navi "We did it! The cavern is safe now!"
     
-    play sound "audio/item_get.mp3"
     call item_get("Heart Container", "item_heart_container")
     
     "A blue light surrounds Link..."
@@ -1184,7 +1182,6 @@ label dodongo_defeated:
     
     darunia "You are a true hero, Brother! As promised, I give you the Goron's Ruby, the Spiritual Stone of Fire!"
     
-    play sound "audio/item_get.mp3"
     call item_get("Goron's Ruby", "item_goron_ruby")
     
     link "Thank you, Darunia. I'll protect it with my life!"
@@ -1426,7 +1423,6 @@ label barinade_defeated:
     
     navi "Great job, Link!"
     
-    play sound "audio/item_get.mp3"
     call item_get("Heart Container", "item_heart_container")
     
     show ruto_sprite at midright
@@ -1439,7 +1435,6 @@ label barinade_defeated:
     
     ruto "This is my most precious possession. My mother gave it to me..."
     
-    play sound "audio/item_get.mp3"
     call item_get("Zora's Sapphire", "item_zora_sapphire")
     
     ruto "It's the Zora's Sapphire, the Spiritual Stone of Water. By giving this to you... it means we're engaged!"
