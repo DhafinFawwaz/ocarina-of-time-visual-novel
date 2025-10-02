@@ -313,7 +313,7 @@ label blocked_by_mido:
     
     play sound "audio/door_locked.mp3"
     
-    mido "Hey! Where do you think you're going, Mr. No-Fairy?"
+    mido "Hey! Where do you think you're going, Mr. No, Fairy?"
     
     if not has_sword or not has_shield:
         mido "You can't go see the Great Deku Tree without proper equipment! Come back when you have a sword and shield!"
@@ -1879,7 +1879,7 @@ label forest_temple_approach:
     
     "Link returns to Kokiri Forest... but everything has changed."
     
-    "Monsters lurk in the shadows. The once-cheerful forest is now dark and twisted."
+    "Monsters lurk in the shadows. The once cheerful forest is now dark and twisted."
     
     show navi at naviright
     
@@ -2189,7 +2189,7 @@ label fire_temple_approach:
     
     link "This will be useful against the boss!"
     
-    "Link battles through the temple, freeing Gorons and solving fire-based puzzles..."
+    "Link battles through the temple, freeing Gorons and solving fire based puzzles..."
     
     scene bg black
     with fade
@@ -3009,7 +3009,7 @@ label twinrova_defeated:
     
     link "Who are you?"
     
-    nabooru "I am Nabooru, second-in-command of the Gerudo thieves. And now... the Sage of Spirit."
+    nabooru "I am Nabooru, second in command of the Gerudo thieves. And now... the Sage of Spirit."
     
     play sound "audio/sage_awakening.mp3"
     
@@ -3482,7 +3482,7 @@ label ganon_final_defeated:
             
             "Ganon lets out a final roar!"
 
-            show ganondorf_sprite at midleft
+            show ganon at midleft
             with dissolve
             show zelda adult at midright
             with dissolve
@@ -3499,7 +3499,7 @@ label ganon_final_defeated:
             
             zelda "Ganon, the Evil King... In the name of the Six Sages, I command you to be sealed away!"
             
-            hide ganondorf_sprite with dissolve
+            hide ganon with dissolve
             hide zelda adult with dissolve
             show bg black
             with dissolve
@@ -3596,7 +3596,7 @@ label ending:
     with fade
     
     show link child at midleft
-    show zelda adult at midright
+    show zelda child at midright
     
     "Link rushes to see Princess Zelda..."
     
