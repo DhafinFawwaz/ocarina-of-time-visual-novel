@@ -30,7 +30,7 @@ image ruto_sprite = Transform("ruto/child.webp", xalign=0.5, yalign=0.5, zoom=0.
 image sheik_sprite = Transform("sheik/sheik.webp", xalign=0.5, yalign=0.5, zoom=0.2)
 image ganondorf_sprite = Transform("ganondorf/ganondorf.webp", xalign=0.5, yalign=0.5, zoom=0.2)
 image gohma = Transform("gohma/gohma.webp", xalign=0.5, yalign=0.5, zoom=0.3)
-image king_dodongo = Transform("king_dodongo/king_dodongo.png", xalign=0.5, yalign=0.5, zoom=0.7)
+image king_dodongo = Transform("king_dodongo/king_dodongo.webp", xalign=0.5, yalign=0.5, zoom=0.3)
 image barinade = Transform("barinade/barinade.png", xalign=0.5, yalign=0.5, zoom=0.7)
 image phantom_ganon = Transform("phantom_ganon/phantom_ganon.webp", xalign=0.5, yalign=0.5, zoom=0.7)
 image volvagia = Transform("volvagia/volvagia.png", xalign=0.5, yalign=0.5, zoom=0.7)
@@ -38,11 +38,13 @@ image morpha = Transform("morpha/morpha.webp", xalign=0.5, yalign=0.5, zoom=0.7)
 image bongo_bongo = Transform("bongo_bongo/bongo_bongo.webp", xalign=0.5, yalign=0.5, zoom=0.7)
 image twinrova = Transform("twinrova/twinrova.webp", xalign=0.5, yalign=0.5, zoom=0.7)
 image ganon = Transform("ganon/ganon.webp", xalign=0.5, yalign=0.5, zoom=0.8)
+image kaepora = Transform("kaepora/kaepora.webp", xalign=0.5, yalign=0.5, zoom=0.4)
 
 # Backgrounds
 image bg kokiri_forest = Transform("backgrounds/kokiri_forest.jpg", fit="cover")
 image bg link_house = Transform("backgrounds/link_house.png", fit="cover")
-image bg deku_tree_inside = Transform("backgrounds/deku_tree_meadow.png", fit="cover")
+image bg deku_tree_meadow = Transform("backgrounds/deku_tree_meadow.png", fit="cover")
+image bg deku_tree_inside = Transform("backgrounds/deku_tree_inside.jpg", fit="cover")
 image bg hyrule_field = Transform("backgrounds/hyrule_field.jpg", fit="cover")
 image bg hyrule_castle = Transform("backgrounds/hyrule_castle.jpg", fit="cover")
 image bg castle_courtyard = Transform("backgrounds/castle_courtyard.webp", fit="cover")
@@ -97,16 +99,17 @@ image item_light_arrows = Transform("items/light_arrows.webp", zoom=1)
 
 label item_get(item_name, item_image):
     play sound "audio/item_get.mp3"
-    show item_popup_bg
-    show expression Transform(item_image, xalign=0.5, yalign=0.28, zoom=0.6) as item_display
+    show item_popup_bg with dissolve
+    show expression Transform(item_image, xalign=0.5, yalign=0.28, zoom=0.6) as item_display with dissolve
     show expression VBox(
         Text("You got the [item_name]", size=30, xalign=0.5),
         Text("Click to continue", size=24, xalign=0.5),
         spacing=20
-    ) as item_popup_bg at itemcenter with dissolve
+    ) as item_desc at itemcenter with dissolve
     pause
     hide item_display
     hide item_popup_bg
+    hide item_desc
     return
 
 # Variables
@@ -141,13 +144,29 @@ default ganon_health = 5
 # Transforms
 transform midleft:
     yalign 0.65
-    xcenter 0.25
+    xcenter 0.2
 transform midright:
     yalign 0.65
-    xcenter 0.75
+    xcenter 0.8
 transform itemcenter:
     yalign 0.505
     xcenter 0.5
+
+transform navileft:
+    yalign 0.4
+    xcenter 0.2
+transform naviright:
+    yalign 0.4
+    xcenter 0.8
+
+# Transform Effects
+transform shake:
+    linear 0.05 xoffset -5 yoffset -5
+    linear 0.05 xoffset 5 yoffset 5
+    linear 0.05 xoffset -5 yoffset 5
+    linear 0.05 xoffset 5 yoffset -5
+    linear 0.05 xoffset 0 yoffset 0
+    repeat 3
 
 label start:
     scene bg black
@@ -212,7 +231,7 @@ label start:
     
     link "Kokiri Forest... my home. But I always felt like I didn't quite belong here."
     
-    show navi at midright
+    show navi at naviright
     
     navi "Link, before we can see the Great Deku Tree, you need to get a sword and shield. Every adventurer needs proper equipment!"
     
@@ -221,7 +240,7 @@ label start:
 label kokiri_forest_hub:
     scene bg kokiri_forest
     show link child
-    show navi at midright
+    show navi at naviright
     
     menu:
         navi "Where do you want to go, Link?"
@@ -281,7 +300,7 @@ label blocked_by_mido:
 label get_sword:
     scene bg kokiri_forest
     show link child
-    show navi at midright
+    show navi at naviright
     
     navi "I heard there's a training area in the forest where you can get a sword. Let's check it out!"
     
@@ -301,7 +320,7 @@ label get_sword:
     
     $ has_sword = True
     
-    show navi at midright
+    show navi at naviright
     
     navi "Great! Now you have a sword! If you need a shield, we should find one before going to the Deku Tree."
     
@@ -310,7 +329,7 @@ label get_sword:
 label get_shield:
     scene bg kokiri_forest
     show link child
-    show navi at midright
+    show navi at naviright
     
     navi "You can buy a Deku Shield from the shop in the village. Let's go!"
     
@@ -337,7 +356,7 @@ label get_shield:
     with fade
     
     show link child
-    show navi at midright
+    show navi at naviright
     
     navi "Perfect! Now you have both a sword and shield. Let's go see the Great Deku Tree!"
     
@@ -382,7 +401,7 @@ label approach_deku_tree:
     with fade
     
     show link child
-    show navi at midright
+    show navi at naviright
     
     navi "This is it, Link! The path to the Great Deku Tree!"
     
@@ -391,7 +410,7 @@ label approach_deku_tree:
     
     "Link and Navi approach the Great Deku Tree..."
     
-    scene bg kokiri_forest
+    scene bg deku_tree_meadow
     with fade
     
     show deku_tree
@@ -402,7 +421,7 @@ label approach_deku_tree:
     deku "Link... Thank you for coming, my boy."
     
     show link child at midleft
-    show navi at midright
+    show navi at naviright
     
     link "Great Deku Tree! What's wrong? Navi said you were in danger!"
     
@@ -436,10 +455,10 @@ label inside_deku_tree:
     scene bg deku_tree_inside
     with fade
     
-    play music "audio/dungeon_theme.mp3"
+    play music "audio/inside_deku_tree.mp3"
     
     show link child
-    show navi at midright
+    show navi at naviright
     
     navi "It's dark in here, Link. Stay alert!"
     
@@ -461,7 +480,7 @@ label inside_deku_tree:
     
     call item_get("Fairy Slingshot", "item_slingshot")
     
-    show navi at midright
+    show navi at naviright
     
     navi "The Fairy Slingshot! You can use Deku Seeds as ammunition to hit distant targets!"
     
@@ -478,7 +497,7 @@ label inside_deku_tree:
     with fade
     
     show link child
-    show navi at midright
+    show navi at naviright
     
     navi "Look! There's a large chamber ahead. I think the boss is in there!"
     
@@ -501,7 +520,7 @@ label boss_gohma:
     "A massive spider-like creature descends from the ceiling!"
     
     show link child at midleft
-    show navi at midright
+    show navi at naviright
     
     navi "That's Queen Gohma! Be careful, Link!"
     
@@ -538,6 +557,7 @@ label gohma_battle:
                 "Strike with sword":
                     link "Now's my chance!"
                     play sound "audio/sword_slash.mp3"
+                    show gohma at shake
                     "Link rushes forward and slashes at Gohma's vulnerable eye!"
                     $ gohma_health -= 1
                     
@@ -561,8 +581,7 @@ label gohma_defeated:
     
     hide gohma
     
-    show link child at center
-    show navi at midright
+    show navi at naviright
     
     navi "We did it, Link! The curse is broken!"
     
@@ -575,14 +594,14 @@ label gohma_defeated:
     
     "Link is transported outside..."
     
-    scene bg kokiri_forest
+    scene bg deku_tree_meadow
     with fade
     
-    play music "audio/sad_theme.mp3"
+    play music "audio/deku_tree_theme.mp3"
     
     show deku_tree
     show link child at midleft
-    show navi at midright
+    show navi at naviright
     
     deku "Link... you have done well, my boy."
     
@@ -603,17 +622,7 @@ label gohma_defeated:
     deku "But now, your true destiny calls. You must go to Hyrule Castle and speak with Princess Zelda."
     
     play sound "audio/item_get.mp3"
-    show item_popup
-    pause 0.5
-    
-    "The Great Deku Tree entrusted you with the Kokiri's Emerald!"
-    
-    $ has_kokiri_emerald = True
-    $ deku_tree_complete = True
-    
-    "Click to continue"
-    
-    hide item_popup
+    call item_get("Kokiri Emerald", "item_kokiri_emerald")
     
     deku "This is the Spiritual Stone of the Forest. Guard it well... It is one of three keys to the Sacred Realm."
     
@@ -679,7 +688,7 @@ label leave_kokiri_forest:
     hide saria_sprite
     with dissolve
     
-    show navi at midright
+    show navi at naviright
     
     navi "It's time to go, Link. Hyrule Castle awaits!"
     
@@ -694,8 +703,8 @@ label hyrule_field_first_time:
     
     play music "audio/hyrule_field_theme.mp3"
     
-    show link child
-    show navi at midright
+    show link child at midleft
+    show navi at naviright
     
     link "Wow... it's so big! I've never seen anything like this!"
     
@@ -743,7 +752,7 @@ label hyrule_castle_approach:
     play music "audio/castle_theme.mp3"
     
     show link child
-    show navi at midright
+    show navi at naviright
     
     navi "There it is! Hyrule Castle!"
     
@@ -844,7 +853,7 @@ label hyrule_field_hub:
     play music "audio/hyrule_field_theme.mp3"
     
     show link child
-    show navi at midright
+    show navi at naviright
     
     menu:
         navi "So Link, where do you want to go?"
@@ -912,7 +921,7 @@ label lon_lon_ranch:
     
     hide malon
     
-    show navi at midright
+    show navi at naviright
     
     navi "She's nice! But we should get back to our quest, Link."
     
@@ -930,7 +939,7 @@ label death_mountain_approach:
     play music "audio/kakariko_theme.mp3"
     
     show link child
-    show navi at midright
+    show navi at naviright
     
     navi "This is Kakariko Village! Death Mountain is just beyond here."
     
@@ -947,7 +956,7 @@ label death_mountain_approach:
     
     link "It's so hot here... and there are falling boulders!"
     
-    show navi at midright
+    show navi at naviright
     
     navi "Be careful, Link! Let's find the Gorons!"
     
@@ -955,8 +964,6 @@ label death_mountain_approach:
     
     scene bg goron_city
     with fade
-    
-    play music "audio/goron_city_theme.mp3"
     
     show link child
     
@@ -1023,10 +1030,10 @@ label dodongo_cavern:
     scene bg dodongo_cavern
     with fade
     
-    play music "audio/dungeon_theme.mp3"
+    play music "audio/dodongo_cavern.mp3"
     
     show link child
-    show navi at midright
+    show navi at naviright
     
     navi "This place is full of lava! Be careful, Link!"
     
@@ -1048,7 +1055,7 @@ label dodongo_cavern:
     
     call item_get("Bomb Bag", "item_bombs")
     
-    show navi at midright
+    show navi at naviright
     
     navi "Bombs! You can use these to destroy cracked walls and boulders! They're also useful in battle!"
     
@@ -1065,7 +1072,7 @@ label dodongo_cavern:
     with fade
     
     show link child
-    show navi at midright
+    show navi at naviright
     
     navi "I can hear something roaring ahead! That must be the boss chamber!"
     
@@ -1077,7 +1084,7 @@ label boss_king_dodongo:
     scene bg dodongo_cavern
     with fade
     
-    play music "audio/boss_battle.mp3"
+    play music "audio/dodongo_boss_battle.mp3"
     
     show king_dodongo
     with dissolve
@@ -1085,7 +1092,7 @@ label boss_king_dodongo:
     "A massive dinosaur-like creature emerges from the lava!"
     
     show link child at midleft
-    show navi at midright
+    show navi at naviright
     
     navi "That's King Dodongo! Watch out for his fire breath!"
     
@@ -1147,21 +1154,12 @@ label dodongo_defeated:
     hide king_dodongo
     
     show link child at center
-    show navi at midright
+    show navi at naviright
     
     navi "We did it! The cavern is safe now!"
     
     play sound "audio/item_get.mp3"
-    show item_popup
-    pause 0.5
-    
-    "Link obtained a Heart Container!"
-    
-    $ dodongo_cavern_complete = True
-    
-    "Click to continue"
-    
-    hide item_popup
+    call item_get("Heart Container", "item_heart_container")
     
     "A blue light surrounds Link..."
     
@@ -1171,7 +1169,7 @@ label dodongo_defeated:
     scene bg goron_city
     with fade
     
-    play music "audio/goron_city_theme.mp3"
+    play music "audio/death_mountain_theme.mp3"
     
     show link child at midleft
     show darunia_sprite at midright
@@ -1183,16 +1181,7 @@ label dodongo_defeated:
     darunia "You are a true hero, Brother! As promised, I give you the Goron's Ruby, the Spiritual Stone of Fire!"
     
     play sound "audio/item_get.mp3"
-    show item_popup
-    pause 0.5
-    
-    "Darunia entrusted you with the Goron's Ruby!"
-    
-    $ has_goron_ruby = True
-    
-    "Click to continue"
-    
-    hide item_popup
+    call item_get("Goron's Ruby", "item_goron_ruby")
     
     link "Thank you, Darunia. I'll protect it with my life!"
     
@@ -1211,10 +1200,10 @@ label zora_domain_approach:
     scene bg zora_river
     with fade
     
-    play music "audio/zora_river_theme.mp3"
+    play music "audio/zora_domain_theme.mp3"
     
     show link child
-    show navi at midright
+    show navi at naviright
     
     navi "This is Zora's River! The domain should be behind that waterfall!"
     
@@ -1239,7 +1228,7 @@ label zora_domain_approach:
     
     link "Wow! This place is beautiful!"
     
-    show navi at midright
+    show navi at naviright
     
     navi "It's an underwater paradise! Let's find the Zora leader!"
     
@@ -1249,7 +1238,7 @@ label zora_domain_approach:
     
     "King Zora" "Hmm? You're not my daughter... Where is Princess Ruto?!"
     
-    show navi at midright
+    show navi at naviright
     
     navi "Princess Ruto? We haven't seen her!"
     
@@ -1268,10 +1257,10 @@ label inside_jabu_jabu:
     scene bg jabu_jabu
     with fade
     
-    play music "audio/dungeon_theme.mp3"
+    play music "audio/jabu_jabu_belly.mp3"
     
     show link child
-    show navi at midright
+    show navi at naviright
     
     navi "We're inside Lord Jabu-Jabu's belly! This is... gross."
     
@@ -1293,7 +1282,7 @@ label inside_jabu_jabu:
     
     call item_get("Boomerang", "item_boomerang")
     
-    show navi at midright
+    show navi at naviright
     
     navi "The Boomerang! You can stun enemies from a distance and retrieve distant items!"
     
@@ -1305,7 +1294,7 @@ label inside_jabu_jabu:
     with fade
     
     show link child
-    show navi at midright
+    show navi at naviright
     
     navi "Link! I sense someone ahead!"
     
@@ -1357,7 +1346,7 @@ label boss_barinade:
     "A bio-electric anemone creature emerges!"
     
     show link child at midleft
-    show navi at midright
+    show navi at naviright
     
     navi "That's Barinade! Be careful of its electricity!"
     
@@ -1427,21 +1416,12 @@ label barinade_defeated:
     hide barinade
     
     show link child at center
-    show navi at midright
+    show navi at naviright
     
     navi "Great job, Link!"
     
     play sound "audio/item_get.mp3"
-    show item_popup
-    pause 0.5
-    
-    "Link obtained a Heart Container!"
-    
-    $ jabu_jabu_complete = True
-    
-    "Click to continue"
-    
-    hide item_popup
+    call item_get("Heart Container", "item_heart_container")
     
     show ruto_sprite at midright
     
@@ -1454,16 +1434,7 @@ label barinade_defeated:
     ruto "This is my most precious possession. My mother gave it to me..."
     
     play sound "audio/item_get.mp3"
-    show item_popup
-    pause 0.5
-    
-    "Princess Ruto entrusted you with the Zora's Sapphire!"
-    
-    $ has_zora_sapphire = True
-    
-    "Click to continue"
-    
-    hide item_popup
+    call item_get("Zora's Sapphire", "item_zora_sapphire")
     
     ruto "It's the Zora's Sapphire, the Spiritual Stone of Water. By giving this to you... it means we're engaged!"
     
@@ -1482,7 +1453,7 @@ label barinade_defeated:
     "King Zora" "My daughter! You're safe! Thank you, young hero!"
     
     show link child
-    show navi at midright
+    show navi at naviright
     
     link "It was my honor, King Zora."
     
@@ -1507,7 +1478,7 @@ label return_to_castle:
     
     "The sky is dark and smoke rises from the castle..."
     
-    show navi at midright
+    show navi at naviright
     
     navi "Link! Something terrible has happened!"
     
@@ -1607,7 +1578,7 @@ label temple_of_time_first:
     play music "audio/temple_of_time_theme.mp3"
     
     show link child
-    show navi at midright
+    show navi at naviright
     
     navi "This is the Temple of Time... It feels ancient and sacred."
     
@@ -1640,7 +1611,7 @@ label temple_of_time_first:
     
     link "The Master Sword..."
     
-    show navi at midright
+    show navi at naviright
     
     navi "Link, this is it. This is your destiny."
     
@@ -1724,7 +1695,7 @@ label awakening_adult:
     
     "Link awakens in the Temple of Time..."
     
-    show navi at midright
+    show navi at naviright
     
     navi "Link... you're... you're all grown up!"
     
@@ -1741,13 +1712,13 @@ label hyrule_field_adult:
     scene bg hyrule_field
     with fade
     
-    play music "audio/hyrule_field_dark.mp3"
+    play music "audio/hyrule_field_theme.mp3"
     
     show link adult
     
     "The sky is dark and foreboding. Monsters roam freely..."
     
-    show navi at midright
+    show navi at naviright
     
     navi "Link... Hyrule has changed so much. It's covered in darkness!"
     
@@ -1804,7 +1775,7 @@ label hyrule_field_adult:
 label adult_temple_hub:
     scene bg hyrule_field
     show link adult
-    show navi at midright
+    show navi at naviright
     
     menu:
         navi "Which temple should we tackle first, Link?"
@@ -1825,7 +1796,7 @@ label forest_temple_approach:
     scene bg kokiri_forest
     with fade
     
-    play music "audio/kokiri_forest_dark.mp3"
+    play music "audio/kokiri_forest_theme.mp3"
     
     show link adult
     
@@ -1833,7 +1804,7 @@ label forest_temple_approach:
     
     "Monsters lurk in the shadows. The once-cheerful forest is now dark and twisted."
     
-    show navi at midright
+    show navi at naviright
     
     navi "The forest... it's suffering under Ganondorf's curse!"
     
@@ -1868,7 +1839,7 @@ label forest_temple_approach:
     
     call item_get("Fairy Bow", "item_bow")
     
-    show navi at midright
+    show navi at naviright
     
     navi "You can shoot arrows at distant enemies! This will be essential for this temple!"
     
@@ -1883,7 +1854,7 @@ label forest_temple_approach:
     with fade
     
     show link adult
-    show navi at midright
+    show navi at naviright
     
     navi "The boss chamber is ahead! I can sense a powerful presence!"
     
@@ -1901,7 +1872,7 @@ label boss_phantom_ganon:
     "A phantom image of Ganondorf on horseback appears!"
     
     show link adult at midleft
-    show navi at midright
+    show navi at naviright
     
     navi "It's Phantom Ganon! A ghost created by Ganondorf himself!"
     
@@ -1984,7 +1955,7 @@ label phantom_ganon_defeated:
     hide phantom_ganon
     
     show link adult at center
-    show navi at midright
+    show navi at naviright
     
     navi "We did it!"
     
@@ -2031,7 +2002,7 @@ label phantom_ganon_defeated:
 label adult_temple_hub_2:
     scene bg hyrule_field
     show link adult
-    show navi at midright
+    show navi at naviright
     
     menu:
         navi "One Sage down! Where to next?"
@@ -2052,26 +2023,26 @@ label fire_temple_approach:
     scene bg death_mountain
     with fade
     
-    play music "audio/death_mountain_dark.mp3"
+    play music "audio/death_mountain_theme.mp3"
     
     show link adult
     
     "Death Mountain is more treacherous than ever..."
     
-    show navi at midright
+    show navi at naviright
     
     navi "The volcano is acting up! Ganondorf's influence, no doubt!"
     
     scene bg goron_city
     with fade
     
-    play music "audio/goron_city_dark.mp3"
+    play music "audio/death_mountain_theme.mp3"
     
     show link adult
     
     "The Goron City is frozen solid! Gorons are trapped in ice!"
     
-    show navi at midright
+    show navi at naviright
     
     navi "Link! The Gorons are frozen! What happened here?"
     
@@ -2089,7 +2060,7 @@ label fire_temple_approach:
     play music "audio/fire_temple_theme.mp3"
     
     show link adult
-    show navi at midright
+    show navi at naviright
     
     navi "The Fire Temple! Be careful, Link—it's even hotter than before!"
     
@@ -2109,7 +2080,7 @@ label fire_temple_approach:
     
     call item_get("Megaton Hammer", "item_megaton_hammer")
     
-    show navi at midright
+    show navi at naviright
     
     navi "The Megaton Hammer! You can smash rusted switches and pound stakes into the ground! It's also a powerful weapon!"
     
@@ -2126,7 +2097,7 @@ label fire_temple_approach:
     with fade
     
     show link adult
-    show navi at midright
+    show navi at naviright
     
     navi "The boss chamber is ahead! Let's finish this!"
     
@@ -2144,7 +2115,7 @@ label boss_volvagia:
     with dissolve
     
     show link adult at midleft
-    show navi at midright
+    show navi at naviright
     
     navi "That's Volvagia! The ancient dragon of the mountain!"
     
@@ -2206,7 +2177,7 @@ label volvagia_defeated:
     hide volvagia
     
     show link adult at center
-    show navi at midright
+    show navi at naviright
     
     navi "You did it! The Fire Temple is free!"
     
@@ -2217,7 +2188,7 @@ label volvagia_defeated:
     show darunia_sprite at midright
     with dissolve
     
-    play music "audio/goron_city_theme.mp3"
+    play music "audio/death_mountain_theme.mp3"
     
     darunia "Brother! You came for me!"
     
@@ -2249,7 +2220,7 @@ label volvagia_defeated:
 label adult_temple_hub_3:
     scene bg hyrule_field
     show link adult
-    show navi at midright
+    show navi at naviright
     
     menu:
         navi "Two Sages awakened! Three more to go!"
@@ -2270,13 +2241,13 @@ label water_temple_approach:
     scene bg lake_hylia
     with fade
     
-    play music "audio/lake_hylia_dark.mp3"
+    play music "audio/hyrule_field_morning.mp3"
     
     show link adult
     
     "Lake Hylia's water level has dropped dramatically..."
     
-    show navi at midright
+    show navi at naviright
     
     navi "The lake is almost dry! Something's wrong at the Water Temple!"
     
@@ -2310,7 +2281,7 @@ label water_temple_approach:
     play music "audio/water_temple_theme.mp3"
     
     show link adult
-    show navi at midright
+    show navi at naviright
     
     navi "This place is like a maze! And everything is flooded!"
     
@@ -2332,7 +2303,7 @@ label water_temple_approach:
     
     call item_get("Longshot", "item_longshot")
     
-    show navi at midright
+    show navi at naviright
     
     navi "The Longshot! It's an upgraded Hookshot that can reach twice as far! Perfect for this temple!"
     
@@ -2349,7 +2320,7 @@ label water_temple_approach:
     with fade
     
     show link adult
-    show navi at midright
+    show navi at naviright
     
     navi "I can sense the boss ahead! Let's finish this!"
     
@@ -2369,7 +2340,7 @@ label boss_morpha:
     "A giant amoeba-like creature with a nucleus inside appears!"
     
     show link adult at midleft
-    show navi at midright
+    show navi at naviright
     
     navi "That's Morpha! The nucleus is its weak point!"
     
@@ -2429,7 +2400,7 @@ label morpha_defeated:
     hide morpha
     
     show link adult at center
-    show navi at midright
+    show navi at naviright
     
     navi "Great job! The water is purified!"
     
@@ -2476,7 +2447,7 @@ label morpha_defeated:
 label adult_temple_hub_4:
     scene bg hyrule_field
     show link adult
-    show navi at midright
+    show navi at naviright
     
     menu:
         navi "Three down, two to go! We're getting close!"
@@ -2493,13 +2464,13 @@ label shadow_temple_approach:
     scene bg kakariko_village
     with fade
     
-    play music "audio/kakariko_dark.mp3"
+    play music "audio/kakariko_theme.mp3"
     
     show link adult
     
     "Kakariko Village is in flames! Monsters attack the villagers!"
     
-    show navi at midright
+    show navi at naviright
     
     navi "Link! The village is under attack!"
     
@@ -2548,7 +2519,7 @@ label shadow_temple_approach:
     play music "audio/shadow_temple_theme.mp3"
     
     show link adult
-    show navi at midright
+    show navi at naviright
     
     navi "This place gives me the creeps... Stay alert, Link!"
     
@@ -2568,7 +2539,7 @@ label shadow_temple_approach:
     
     call item_get("Hover Boots", "item_hover_boots")
     
-    show navi at midright
+    show navi at naviright
     
     navi "The Hover Boots! You can walk on air for a short time! Perfect for crossing gaps!"
     
@@ -2585,7 +2556,7 @@ label shadow_temple_approach:
     with fade
     
     show link adult
-    show navi at midright
+    show navi at naviright
     
     navi "The boss is near! I can feel it!"
     
@@ -2605,7 +2576,7 @@ label boss_bongo_bongo:
     "A massive invisible creature appears, only its hands and head visible!"
     
     show link adult at midleft
-    show navi at midright
+    show navi at naviright
     
     navi "Bongo Bongo! Use the Eye of Truth to see it!"
     
@@ -2691,7 +2662,7 @@ label bongo_defeated:
     hide bongo_bongo
     
     show link adult at center
-    show navi at midright
+    show navi at naviright
     
     navi "That was terrifying! But we won!"
     
@@ -2740,7 +2711,7 @@ label spirit_temple_approach:
     play music "audio/gerudo_valley_theme.mp3"
     
     show link adult
-    show navi at midright
+    show navi at naviright
     
     navi "The desert! This is it—the final temple!"
     
@@ -2755,7 +2726,7 @@ label spirit_temple_approach:
     
     "A massive temple carved from stone rises from the sand..."
     
-    show navi at midright
+    show navi at naviright
     
     navi "The Spirit Temple! But look—it has areas only a child can enter!"
     
@@ -2794,7 +2765,7 @@ label spirit_temple_approach:
     with fade
     
     show link child
-    show navi at midright
+    show navi at naviright
     
     navi "Now we can explore the child areas!"
     
@@ -2813,7 +2784,7 @@ label spirit_temple_approach:
     with fade
     
     show link adult
-    show navi at midright
+    show navi at naviright
     
     navi "Now we can reach the boss chamber!"
     
@@ -2833,7 +2804,7 @@ label boss_twinrova:
     "Two witches appear—one surrounds herself in fire, the other in ice!"
     
     show link adult at midleft
-    show navi at midright
+    show navi at naviright
     
     navi "Kotake and Koume—the Twinrova witches! They serve Ganondorf!"
     
@@ -2919,7 +2890,7 @@ label twinrova_defeated:
     hide twinrova
     
     show link adult at center
-    show navi at midright
+    show navi at naviright
     
     navi "We did it! All the temples are complete!"
     
@@ -3002,7 +2973,7 @@ label ganon_castle_approach:
     play music "audio/ganon_castle_theme.mp3"
     
     show link adult
-    show navi at midright
+    show navi at naviright
     
     navi "There it is—Ganondorf's Castle! This is it, Link!"
     
@@ -3025,7 +2996,7 @@ label ganon_castle_approach:
     with fade
     
     show link adult
-    show navi at midright
+    show navi at naviright
     
     navi "The path to Ganondorf is open! This is the final battle!"
     
@@ -3256,7 +3227,7 @@ label castle_escape:
     scene bg black
     with fade
     
-    play music "audio/ganon_theme.mp3"
+    play music "audio/ganondorf_theme.mp3"
     
     ganondorf "YOU... HAVE NOT... WON!"
     
@@ -3291,7 +3262,7 @@ label final_boss_ganon:
     scene bg hyrule_field
     with fade
     
-    play music "audio/ganon_battle.mp3"
+    play music "audio/ganondorf_battle.mp3"
     
     show ganon
     show link adult at midleft
@@ -3470,7 +3441,7 @@ label ending:
     
     link "I'm... I'm a child again."
     
-    show navi at midright
+    show navi at naviright
     
     navi "Link, we're back in the past! Before you drew the Master Sword!"
     
@@ -3520,7 +3491,7 @@ label ending:
     play music "audio/kokiri_forest_theme.mp3"
     
     show link child
-    show navi at midright
+    show navi at naviright
     
     navi "Link, what will you do now?"
     
