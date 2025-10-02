@@ -62,7 +62,7 @@ image bg death_mountain = Transform("backgrounds/death_mountain.webp", fit="cove
 image bg goron_city = Transform("backgrounds/goron_city.jpg", fit="cover")
 image bg dodongo_cavern = Transform("backgrounds/dodongo_cavern.webp", fit="cover")
 image bg zora_river = Transform("backgrounds/zora_river.webp", fit="cover")
-image bg zora_domain = Transform("backgrounds/zora_domain.jpg", fit="cover")
+image bg zora_domain = Transform("backgrounds/zoras_domain.jpg", fit="cover")
 image bg jabu_jabu = Transform("backgrounds/jabu_jabu.png", fit="cover")
 image bg lake_hylia = Transform("backgrounds/lake_hylia.webp", fit="cover")
 image bg temple_of_time = Transform("backgrounds/temple_of_time.jpg", fit="cover")
@@ -137,6 +137,23 @@ default learned_zelda_lullaby = False
 default learned_saria_song = False
 default can_enter_death_mountain = False
 default can_enter_zora_domain = False
+default has_slingshot = False
+default has_bomb_bag = False
+default has_boomerang = False
+default has_hookshot = False
+default has_bow = False
+default has_megaton_hammer = False
+default has_fairy_bow = False
+default has_ocarina_of_time = False
+default has_longshot = False
+default has_hover_boots = False
+default has_mirror_shield = False
+
+default has_fire_medallion = False
+default has_water_medallion = False
+default has_shadow_medallion = False
+default has_spirit_medallion = False
+default has_forest_medallion = False
 
 # Boss health
 default gohma_health = 3
@@ -156,6 +173,9 @@ transform midleft:
 transform midright:
     yalign 0.65
     xcenter 0.8
+transform midcenter:
+    yalign 0.65
+    xcenter 0.5
 transform itemcenter:
     yalign 0.505
     xcenter 0.5
@@ -487,6 +507,7 @@ label inside_deku_tree:
     link "What's this?"
     
     call item_get("Fairy Slingshot", "item_slingshot")
+    $ has_slingshot = True
     
     show navi at naviright
     
@@ -569,6 +590,7 @@ label gohma_battle:
                     show gohma at shake
                     "Link rushes forward and slashes at Gohma's vulnerable eye!"
                     $ gohma_health -= 1
+                    play sound "sound/enemy_hit.wav"
                     
                     if gohma_health > 0:
                         play sound "audio/enemy_hurt.mp3"
@@ -631,6 +653,7 @@ label gohma_defeated:
     deku "But now, your true destiny calls. You must go to Hyrule Castle and speak with Princess Zelda."
     
     call item_get("Kokiri Emerald", "item_kokiri_emerald")
+    $ has_kokiri_emerald = True
     
     deku "This is the Spiritual Stone of the Forest. Guard it well... It is one of three keys to the Sacred Realm."
     
@@ -775,7 +798,7 @@ label hyrule_castle_approach:
     
     "Link peers through a window..."
     
-    show zelda_sprite at midright
+    show zelda child at midright
     with dissolve
     
     play music "audio/zelda_theme.mp3"
@@ -786,7 +809,10 @@ label hyrule_castle_approach:
     
     zelda "I've been having dreams about you. Dreams of a dark future where Hyrule is consumed by evil."
     
-    show impa_sprite at center
+    show link child at midleft
+    with dissolve
+
+    show impa_sprite at midcenter
     with dissolve
     
     impa "Your Highness, is this the boy from your dreams?"
@@ -801,18 +827,18 @@ label hyrule_castle_approach:
     
     zelda "In my dreams, I saw Ganondorf standing over Hyrule, covered in darkness. And I saw you standing against him."
     
-    show ganondorf_sprite at midleft
-    with dissolve
+    # show ganondorf_sprite at midleft
+    # with dissolve
     
     play music "audio/ganondorf_theme.mp3"
     
     "A tall, imposing figure rides past on horseback..."
     
-    ganondorf "..."
+    # ganondorf "..."
     
     "His evil gaze pierces through the window..."
     
-    hide ganondorf_sprite
+    # hide ganondorf_sprite
     
     zelda "Did you see him? That look in his eyes... There's nothing but evil there!"
     
@@ -991,6 +1017,9 @@ label death_mountain_approach:
     
     show darunia_sprite at midright
     with dissolve
+
+    show link child at midleft
+    with dissolve
     
     play sound "audio/door_open.mp3"
     
@@ -1062,6 +1091,7 @@ label dodongo_cavern:
     link "What's inside?"
     
     call item_get("Bomb Bag", "item_bombs")
+    $ has_bomb_bag = True
     
     show navi at naviright
     
@@ -1142,6 +1172,7 @@ label dodongo_battle:
                     "Link attacks King Dodongo's exposed belly repeatedly!"
                     show king_dodongo at shake
                     $ dodongo_health -= 1
+                    play sound "sound/enemy_hit.wav"
                     
                     if dodongo_health > 0:
                         play sound "audio/enemy_hurt.mp3"
@@ -1163,7 +1194,7 @@ label dodongo_defeated:
     
     hide king_dodongo
     
-    show link child at center
+    show link child at midleft
     show navi at naviright
     
     navi "We did it! The cavern is safe now!"
@@ -1190,6 +1221,7 @@ label dodongo_defeated:
     darunia "You are a true hero, Brother! As promised, I give you the Goron's Ruby, the Spiritual Stone of Fire!"
     
     call item_get("Goron's Ruby", "item_goron_ruby")
+    $ has_goron_ruby = True
     
     link "Thank you, Darunia. I'll protect it with my life!"
     
@@ -1202,7 +1234,7 @@ label dodongo_defeated:
     scene bg black
     with fade
     
-    jump zora_domain_approach
+    jump hyrule_field_hub
 
 label zora_domain_approach:
     scene bg zora_river
@@ -1289,6 +1321,7 @@ label inside_jabu_jabu:
     link "Another treasure!"
     
     call item_get("Boomerang", "item_boomerang")
+    $ has_boomerang = True
     
     show navi at naviright
     
@@ -1393,6 +1426,7 @@ label barinade_battle:
                             play sound "sound/sword_slash.wav"
                             "Link slashes at Barinade repeatedly!"
                             $ barinade_health -= 1
+                            play sound "sound/enemy_hit.wav"
                             show barinade at shake
                             
                             if barinade_health > 0:
@@ -1425,7 +1459,7 @@ label barinade_defeated:
     
     hide barinade
     
-    show link child at center
+    show link child at midleft
     show navi at naviright
     
     navi "Great job, Link!"
@@ -1443,6 +1477,7 @@ label barinade_defeated:
     ruto "This is my most precious possession. My mother gave it to me..."
     
     call item_get("Zora's Sapphire", "item_zora_sapphire")
+    $ has_zora_sapphire = True
     
     ruto "It's the Zora's Sapphire, the Spiritual Stone of Water. By giving this to you... it means we're engaged!"
     
@@ -1506,7 +1541,7 @@ label return_to_castle:
     "Suddenly, a horse gallops toward Link!"
     
     show impa_sprite at center
-    show zelda_sprite at midright
+    show zelda child at midright
     
     impa "Link! You must get away from here!"
     
@@ -1518,7 +1553,7 @@ label return_to_castle:
     
     zelda "Don't let Ganondorf get the Triforce!"
     
-    hide zelda_sprite
+    hide zelda child
     hide impa_sprite
     with dissolve
     
@@ -1551,10 +1586,11 @@ label return_to_castle:
     "Link dives into the moat and retrieves it..."
     
     call item_get("Ocarina of Time", "item_ocarina_of_time")
+    $ has_ocarina_of_time = True
     
     "A vision appears before Link..."
     
-    show zelda_sprite at center
+    show zelda child at center
     
     zelda "Link... if you're seeing this, then I've failed to protect Hyrule."
     
@@ -1568,7 +1604,7 @@ label return_to_castle:
     
     zelda "Please, Link... you're Hyrule's only hope now."
     
-    hide zelda_sprite
+    hide zelda child
     
     navi "Link... we have to go to the Temple of Time!"
     
@@ -1846,6 +1882,7 @@ label forest_temple_approach:
     link "The Fairy Bow!"
     
     call item_get("Fairy Bow", "item_bow")
+    $ has_fairy_bow = True
     
     show navi at naviright
     
@@ -1919,6 +1956,7 @@ label phantom_ganon_battle:
                     play sound "audio/enemy_hit.mp3"
                     "The energy ball strikes Phantom Ganon!"
                     $ phantom_ganon_health -= 1
+                    play sound "sound/enemy_hit.wav"
                     show phantom_ganon at shake
                     
                     if phantom_ganon_health > 0:
@@ -1964,7 +2002,7 @@ label phantom_ganon_defeated:
     
     hide phantom_ganon
     
-    show link adult at center
+    show link adult at midleft
     show navi at naviright
     
     navi "We did it!"
@@ -1993,6 +2031,7 @@ label phantom_ganon_defeated:
     saria "Take this, Link. It's my power as a Sage."
     
     call item_get("Forest Medallion", "item_forest_medallion")
+    $ has_forest_medallion = True
     
     saria "Four more Sages remain. When all five are awakened, you'll have the power to face Ganondorf."
     
@@ -2089,6 +2128,7 @@ label fire_temple_approach:
     link "This is heavy!"
     
     call item_get("Megaton Hammer", "item_megaton_hammer")
+    $ has_megaton_hammer = True
     
     show navi at naviright
     
@@ -2166,6 +2206,7 @@ label volvagia_battle:
                     play sound "sound/sword_slash.wav"
                     "Link slashes repeatedly at Volvagia's vulnerable body!"
                     $ volvagia_health -= 1
+                    play sound "sound/enemy_hit.wav"
                     show volvagia at shake
                     
                     if volvagia_health > 0:
@@ -2188,7 +2229,7 @@ label volvagia_defeated:
     
     hide volvagia
     
-    show link adult at center
+    show link adult at midleft
     show navi at naviright
     
     navi "You did it! The Fire Temple is free!"
@@ -2217,6 +2258,7 @@ label volvagia_defeated:
     darunia "Take my power, Brother! Use it to defeat Ganondorf!"
     
     call item_get("Fire Medallion", "item_fire_medallion")
+    $ has_fire_medallion = True
     
     darunia "You've always been a true Brother to me and my people. Now go! Awaken the other Sages!"
     
@@ -2314,6 +2356,7 @@ label water_temple_approach:
     link "What's this?"
     
     call item_get("Longshot", "item_longshot")
+    $ has_longshot = True
     
     show navi at naviright
     
@@ -2385,6 +2428,7 @@ label morpha_battle:
                     play sound "sound/sword_slash.wav"
                     "Link slashes at the vulnerable nucleus!"
                     $ morpha_health -= 1
+                    play sound "sound/enemy_hit.wav"
                     show morpha at shake
                     
                     if morpha_health > 0:
@@ -2413,7 +2457,7 @@ label morpha_defeated:
     
     hide morpha
     
-    show link adult at center
+    show link adult at midleft
     show navi at naviright
     
     navi "Great job! The water is purified!"
@@ -2446,6 +2490,7 @@ label morpha_defeated:
     "Ruto awakens as the Sage of Water!"
     
     call item_get("Water Medallion", "item_water_medallion")
+    $ has_water_medallion = True
     
     ruto "Go, Link. Two more Sages await. Save Hyrule!"
     
@@ -2552,6 +2597,7 @@ label shadow_temple_approach:
     link "Hover Boots!"
     
     call item_get("Hover Boots", "item_hover_boots")
+    $ has_hover_boots = True
     
     show navi at naviright
     
@@ -2641,6 +2687,7 @@ label bongo_battle:
                                     play sound "sound/sword_slash.wav"
                                     "Link slashes at Bongo Bongo!"
                                     $ bongo_health -= 1
+                                    play sound "sound/enemy_hit.wav"
                                     show bongo_bongo at shake
                                     
                                     if bongo_health > 0:
@@ -2678,7 +2725,7 @@ label bongo_defeated:
     
     hide bongo_bongo
     
-    show link adult at center
+    show link adult at midleft
     show navi at naviright
     
     navi "That was terrifying! But we won!"
@@ -2709,6 +2756,7 @@ label bongo_defeated:
     impa "All will be revealed in time. For now, take my power."
     
     call item_get("Shadow Medallion", "item_shadow_medallion")
+    $ has_shadow_medallion = True
     
     impa "One Sage remains. Go to the Spirit Temple in the desert. Complete your quest!"
     
@@ -2869,6 +2917,7 @@ label twinrova_battle:
                             play sound "sound/sword_slash.wav"
                             "Link slashes at the fallen Twinrova!"
                             $ twinrova_health -= 1
+                            play sound "sound/enemy_hit.wav"
                             show twinrova at shake
                             
                             if twinrova_health > 0:
@@ -2889,6 +2938,7 @@ label twinrova_battle:
                     play sound "audio/enemy_hit.mp3"
                     "It works the same way!"
                     $ twinrova_health -= 1
+                    play sound "sound/enemy_hit.wav"
                     show twinrova at shake
                     
                     if twinrova_health > 0:
@@ -2910,7 +2960,7 @@ label twinrova_defeated:
     
     hide twinrova
     
-    show link adult at center
+    show link adult at midleft
     show navi at naviright
     
     navi "We did it! All the temples are complete!"
@@ -2932,6 +2982,7 @@ label twinrova_defeated:
     "Nabooru awakens as the Sage of Spirit!"
     
     call item_get("Spirit Medallion", "item_spirit_medallion")
+    $ has_spirit_medallion = Trues
     
     nabooru "All six Sages are now awakened, Link. It's time to face Ganondorf!"
     
@@ -3067,7 +3118,7 @@ label ganon_castle_approach:
     play music "audio/zelda_theme.mp3"
     
     hide sheik_sprite
-    show zelda_sprite at midright
+    show zelda child at midright
     with dissolve
     
     zelda "Link... I'm sorry for deceiving you."
@@ -3094,7 +3145,7 @@ label final_boss_ganondorf:
     
     show ganondorf_sprite
     show link adult at midleft
-    show zelda_sprite at midright
+    show zelda child at midright
     
     zelda "I'll create openings for you, Link! Watch for my signals!"
     
@@ -3139,6 +3190,7 @@ label ganondorf_battle:
                             play sound "sound/sword_slash.wav"
                             "Link rushes forward and slashes at Ganondorf!"
                             $ ganon_health -= 1
+                            play sound "sound/enemy_hit.wav"
                             show ganondorf_sprite at shake
                             
                             if ganon_health > 0:
@@ -3176,8 +3228,8 @@ label ganondorf_defeated:
     
     hide ganondorf_sprite
     
-    show link adult at center
-    show zelda_sprite at midright
+    show link adult at midleft
+    show zelda child at midright
     
     zelda "We did it, Link! Ganondorf is defeated!"
     
@@ -3216,7 +3268,7 @@ label castle_escape:
     with fade
     
     show link adult
-    show zelda_sprite at midright
+    show zelda child at midright
     
     zelda "Run, Link! This way!"
     
@@ -3232,7 +3284,7 @@ label castle_escape:
     with fade
     
     show link adult at midleft
-    show zelda_sprite at midright
+    show zelda child at midright
     
     link "We made it..."
     
@@ -3264,7 +3316,7 @@ label castle_escape:
     "A massive beast emerges from the ruins—Ganon, the Demon King!"
     
     show link adult at midleft
-    show zelda_sprite at midright
+    show zelda child at midright
     
     zelda "He's transformed into Ganon! His true form!"
     
@@ -3323,6 +3375,7 @@ label ganon_battle:
                     play sound "audio/enemy_hit.mp3"
                     "Ganon roars in pain!"
                     $ ganon_health -= 1
+                    play sound "sound/enemy_hit.wav"
                     show ganon at shake
                     
                     if ganon_health == 2:
@@ -3345,6 +3398,7 @@ label ganon_battle:
                     play sound "audio/enemy_hit.mp3"
                     "Ganon is stunned!"
                     $ ganon_health -= 1
+                    play sound "sound/enemy_hit.wav"
                     show ganon at shake
                     
                     if ganon_health > 0:
@@ -3370,8 +3424,8 @@ label ganon_final_defeated:
     
     "Ganon falls to his knees, weakened!"
     
-    show link adult at center
-    show zelda_sprite at midright
+    show link adult at midleft
+    show zelda child at midright
     
     zelda "Now, Link! Deliver the final blow!"
     
@@ -3414,7 +3468,7 @@ label ending:
     play music "audio/zelda_theme.mp3"
     
     show link adult at midleft
-    show zelda_sprite at midright
+    show zelda child at midright
     
     "The darkness lifts from Hyrule. The sun shines brightly once more."
     
@@ -3485,7 +3539,7 @@ label ending:
     with fade
     
     show link child at midleft
-    show zelda_sprite at midright
+    show zelda child at midright
     
     "Link rushes to see Princess Zelda..."
     
