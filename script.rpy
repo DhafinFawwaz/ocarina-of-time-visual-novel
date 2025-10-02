@@ -3547,8 +3547,12 @@ label ending:
     
     play music "audio/credits_theme.mp3"
     
-    centered "{size=+10}The Legend of Zelda{/size}\n{size=+5}Ocarina of Time{/size}\n\n{size=-2}Visual Novel Adaptation{/size}"
-    
+    show expression VBox(
+        Text("The Legend of Zelda: Ocarina of Time", size=60, xalign=0.5),
+        Text("Visual Novel Edition", size=36, xalign=0.5),
+        spacing=20
+    ) at truecenter with dissolve
+
     "Link's journey through time saved Hyrule from darkness."
     
     "The Six Sages returned to protect the Sacred Realm."
