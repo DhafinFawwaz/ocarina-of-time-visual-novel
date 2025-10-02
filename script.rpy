@@ -15,11 +15,11 @@ define talon = Character("Talon", color="#daa520")
 define malon = Character("Malon", color="#ff6347")
 define kaepora = Character("Kaepora Gaebora", color="#cd853f")
 define nabooru = Character("Nabooru", color="#ff4500")
-define king_zoora = Character("King Zora", color="#3f61ed")
+define king_zora = Character("King Zora", color="#3f61ed")
 
 # Images
 image link child = Transform("link/child.png", xalign=0.5, yalign=0.5, zoom=0.5)
-image link adult = Transform("link/adult.png", xalign=0.5, yalign=0.5, zoom=0.65)
+image link adult = Transform("link/adult.png", xalign=0.5, yalign=0.5, zoom=0.60)
 image navi = Transform("navi/navi.webp", xalign=0.5, yalign=0.5, zoom=0.8)
 image deku_tree = Transform("deku_tree/deku_tree.png", xalign=0.5, yalign=0.5, zoom=0.5)
 image saria_sprite = Transform("saria/saria.png", xalign=0.5, yalign=0.5, zoom=0.275)
@@ -28,21 +28,21 @@ image zelda child = Transform("zelda/child.webp", xalign=0.5, yalign=0.5, zoom=0
 image zelda adult = Transform("zelda/adult.webp", xalign=0.5, yalign=0.5, zoom=0.2)
 image impa_sprite = Transform("impa/impa.webp", xalign=0.5, yalign=0.5, zoom=0.3)
 image darunia_sprite = Transform("darunia/darunia.webp", xalign=0.5, yalign=0.5, zoom=0.3)
-image ruto_sprite = Transform("ruto/child.webp", xalign=0.5, yalign=0.5, zoom=0.3)
+image ruto_sprite = Transform("ruto/child.webp", xalign=0.5, yalign=0.5, zoom=0.25)
 image sheik_sprite = Transform("sheik/sheik.webp", xalign=0.5, yalign=0.5, zoom=0.2)
 image ganondorf_sprite = Transform("ganondorf/ganondorf.webp", xalign=0.5, yalign=0.5, zoom=0.2)
 image gohma = Transform("gohma/gohma.webp", xalign=0.5, yalign=0.5, zoom=0.3)
 image king_dodongo = Transform("king_dodongo/king_dodongo.webp", xalign=0.5, yalign=0.5, zoom=0.3)
-image barinade = Transform("barinade/barinade.png", xalign=0.5, yalign=0.5, zoom=0.7)
+image barinade = Transform("barinade/barinade.webp", xalign=0.5, yalign=0.5, zoom=0.3)
 image phantom_ganon = Transform("phantom_ganon/phantom_ganon.webp", xalign=0.5, yalign=0.5, zoom=0.7)
-image volvagia = Transform("volvagia/volvagia.png", xalign=0.5, yalign=0.5, zoom=0.7)
-image morpha = Transform("morpha/morpha.webp", xalign=0.5, yalign=0.5, zoom=0.7)
-image bongo_bongo = Transform("bongo_bongo/bongo_bongo.webp", xalign=0.5, yalign=0.5, zoom=0.7)
-image twinrova = Transform("twinrova/twinrova.webp", xalign=0.5, yalign=0.5, zoom=0.7)
-image ganon = Transform("ganon/ganon.webp", xalign=0.5, yalign=0.5, zoom=0.8)
+image volvagia = Transform("volvagia/volvagia.webp", xalign=0.5, yalign=0.5, zoom=0.25)
+image morpha = Transform("morpha/morpha.webp", xalign=0.5, yalign=0.5, zoom=2)
+image bongo_bongo = Transform("bongo_bongo/bongo_bongo.webp", xalign=0.5, yalign=0.5, zoom=0.4)
+image twinrova = Transform("twinrova/twinrova.webp", xalign=0.5, yalign=0.5, zoom=0.5)
+image ganon = Transform("ganon/ganon.webp", xalign=0.5, yalign=0.5, zoom=0.4)
 image kaepora = Transform("kaepora/kaepora.webp", xalign=0.5, yalign=0.5, zoom=0.4)
 image nabooru = Transform("nabooru/nabooru.webp", xalign=0.5, yalign=0.5, zoom=0.2)
-image king_zora = Transform("king_zora/king_zora.webp", xalign=0.5, yalign=0.5, zoom=0.3)
+image king_zora = Transform("king_zora/king_zora.webp", xalign=0.5, yalign=0.5, zoom=0.35)
 image malon = Transform("malon/malon.png", xalign=0.5, yalign=0.5, zoom=0.45)
 image rauru = Transform("rauru/rauru.webp", xalign=0.5, yalign=0.5, zoom=0.2)
 image talon = Transform("talon/talon.webp", xalign=0.5, yalign=0.5, zoom=0.4)
@@ -74,7 +74,9 @@ image bg water_temple = Transform("backgrounds/water_temple.webp", fit="cover")
 image bg shadow_temple = Transform("backgrounds/shadow_temple.webp", fit="cover")
 image bg spirit_temple = Transform("backgrounds/spirit_temple.png", fit="cover")
 image bg ganon_castle = Transform("backgrounds/ganon_castle.png", fit="cover")
+image bg final_battle = Transform("backgrounds/final_battle.jpg", fit="cover")
 image bg black = "#000000"
+image bg white = "#ffffff"
 
 image item_popup_bg = Transform("items/frame.png", xalign=0.5, yalign=0.3, zoom=0.8)
 
@@ -165,6 +167,7 @@ default morpha_health = 3
 default bongo_health = 3
 default twinrova_health = 3
 default ganon_health = 5
+default phantom_ganon_battle_ganon_health = 5
 
 # Transforms
 transform midleft:
@@ -213,7 +216,7 @@ label start:
     scene bg black
     with fade
     
-    play music "audio/kokiri_forest_theme.mp3" fadein 2.0
+    play music "audio/kokiri_forest_theme.mp3" if_changed
     
     "Long ago, in the mystical land of Hyrule..."
     "A young boy lived in Kokiri Forest, a place where children never grow up."
@@ -401,7 +404,7 @@ label visit_saria:
     show saria_sprite at midright
     with dissolve
     
-    play music "audio/saria_song.mp3"
+    play music "audio/saria_song.mp3" if_changed
     
     saria "Link! I'm so glad you came to see me!"
     
@@ -444,7 +447,7 @@ label approach_deku_tree:
     show deku_tree
     with dissolve
     
-    play music "audio/deku_tree_theme.mp3"
+    play music "audio/deku_tree_theme.mp3" if_changed
     
     deku "Link... Thank you for coming, my boy."
     
@@ -483,7 +486,7 @@ label inside_deku_tree:
     scene bg deku_tree_inside
     with fade
     
-    play music "audio/inside_deku_tree.mp3"
+    play music "audio/inside_deku_tree.mp3" if_changed
     
     show link child
     show navi at naviright
@@ -538,7 +541,7 @@ label boss_gohma:
     scene bg black
     with fade
     
-    play music "audio/boss_battle.mp3"
+    play music "audio/boss_battle.mp3" if_changed
     
     scene bg deku_tree_inside
     with fade
@@ -628,7 +631,7 @@ label gohma_defeated:
     scene bg deku_tree_meadow
     with fade
     
-    play music "audio/deku_tree_theme.mp3"
+    play music "audio/deku_tree_theme.mp3" if_changed
     
     show deku_tree
     show link child at midleft
@@ -692,7 +695,7 @@ label leave_kokiri_forest:
     show saria_sprite at midright
     with dissolve
     
-    play music "audio/saria_song.mp3"
+    play music "audio/saria_song.mp3" if_changed
     
     saria "Link! Wait!"
     
@@ -732,7 +735,7 @@ label hyrule_field_first_time:
     scene bg hyrule_field
     with fade
     
-    play music "audio/hyrule_field_theme.mp3"
+    play music "audio/hyrule_field_theme.mp3" if_changed
     
     show link child at midleft
     show navi at naviright
@@ -741,7 +744,7 @@ label hyrule_field_first_time:
     
     navi "This is Hyrule Field, Link! And look—there's Hyrule Castle Town in the distance!"
     
-    show kaepora at center
+    show kaepora at midcenter
     with dissolve
     
     play sound "audio/owl_hoot.mp3"
@@ -780,7 +783,7 @@ label hyrule_castle_approach:
     scene bg hyrule_castle
     with fade
     
-    play music "audio/castle_theme.mp3"
+    play music "audio/castle_theme.mp3" if_changed
     
     show link child
     show navi at naviright
@@ -801,7 +804,7 @@ label hyrule_castle_approach:
     show zelda child at midright
     with dissolve
     
-    play music "audio/zelda_theme.mp3"
+    play music "audio/zelda_theme.mp3" if_changed
     
     zelda "Link! You're finally here!"
     
@@ -830,7 +833,7 @@ label hyrule_castle_approach:
     # show ganondorf_sprite at midleft
     # with dissolve
     
-    play music "audio/ganondorf_theme.mp3"
+    play music "audio/ganondorf_theme.mp3" if_changed
     
     "A tall, imposing figure rides past on horseback..."
     
@@ -884,7 +887,7 @@ label hyrule_field_hub:
     scene bg hyrule_field
     with fade
     
-    play music "audio/hyrule_field_theme.mp3"
+    play music "audio/hyrule_field_theme.mp3" if_changed
     
     show link child
     show navi at naviright
@@ -926,7 +929,7 @@ label lon_lon_ranch:
     scene bg lon_lon_ranch
     with fade
     
-    play music "audio/lon_lon_ranch_theme.mp3"
+    play music "audio/lon_lon_ranch_theme.mp3" if_changed
     
     show link child
     
@@ -970,7 +973,7 @@ label death_mountain_approach:
     scene bg kakariko_village
     with fade
     
-    play music "audio/kakariko_theme.mp3"
+    play music "audio/kakariko_theme.mp3" if_changed
     
     show link child
     show navi at naviright
@@ -984,7 +987,7 @@ label death_mountain_approach:
     scene bg death_mountain
     with fade
     
-    play music "audio/death_mountain_theme.mp3"
+    play music "audio/death_mountain_theme.mp3" if_changed
     
     show link child
     
@@ -1067,7 +1070,7 @@ label dodongo_cavern:
     scene bg dodongo_cavern
     with fade
     
-    play music "audio/dodongo_cavern.mp3"
+    play music "audio/dodongo_cavern.mp3" if_changed
     
     show link child
     show navi at naviright
@@ -1122,7 +1125,7 @@ label boss_king_dodongo:
     scene bg dodongo_cavern
     with fade
     
-    play music "audio/dodongo_boss_battle.mp3"
+    play music "audio/dodongo_boss_battle.mp3" if_changed
     
     show king_dodongo
     with dissolve
@@ -1209,7 +1212,7 @@ label dodongo_defeated:
     scene bg goron_city
     with fade
     
-    play music "audio/death_mountain_theme.mp3"
+    play music "audio/death_mountain_theme.mp3" if_changed
     
     show link child at midleft
     show darunia_sprite at midright
@@ -1240,7 +1243,7 @@ label zora_domain_approach:
     scene bg zora_river
     with fade
     
-    play music "audio/zora_domain_theme.mp3"
+    play music "audio/zora_domain_theme.mp3" if_changed
     
     show link child
     show navi at naviright
@@ -1262,7 +1265,7 @@ label zora_domain_approach:
     scene bg zora_domain
     with fade
     
-    play music "audio/zora_domain_theme.mp3"
+    play music "audio/zora_domain_theme.mp3" if_changed
     
     show link child
     
@@ -1275,6 +1278,12 @@ label zora_domain_approach:
     "Zora Guard" "You! Small Hylian! King Zora wishes to see you immediately!"
     
     "Link is escorted to the throne room..."
+
+    show link child at midleft
+    with dissolve
+
+    show king_zora at midcenter
+    with dissolve
     
     king_zora "Hmm? You're not my daughter... Where is Princess Ruto?!"
     
@@ -1297,7 +1306,7 @@ label inside_jabu_jabu:
     scene bg jabu_jabu
     with fade
     
-    play music "audio/jabu_jabu_belly.mp3"
+    play music "audio/jabu_jabu_belly.mp3" if_changed
     
     show link child
     show navi at naviright
@@ -1379,7 +1388,7 @@ label boss_barinade:
     scene bg jabu_jabu
     with fade
     
-    play music "audio/boss_battle.mp3"
+    play music "audio/boss_battle.mp3" if_changed
     
     show barinade
     with dissolve
@@ -1461,6 +1470,7 @@ label barinade_defeated:
     
     show link child at midleft
     show navi at naviright
+    play music "audio/zora_domain_theme.mp3" if_changed
     
     navi "Great job, Link!"
     
@@ -1513,7 +1523,7 @@ label return_to_castle:
     scene bg hyrule_field
     with fade
     
-    play music "audio/ganondorf_theme.mp3"
+    play music "audio/ganondorf_theme.mp3" if_changed
     
     show link child
     
@@ -1540,7 +1550,10 @@ label return_to_castle:
     
     "Suddenly, a horse gallops toward Link!"
     
-    show impa_sprite at center
+    show link child at midleft
+    with dissolve
+    show impa_sprite at midcenter
+    with dissolve
     show zelda child at midright
     
     impa "Link! You must get away from here!"
@@ -1559,7 +1572,7 @@ label return_to_castle:
     
     "The horse races away..."
     
-    show ganondorf_sprite at center
+    show ganondorf_sprite
     with dissolve
     
     ganondorf "You! Boy! Did you see a girl on horseback pass by here?"
@@ -1590,7 +1603,7 @@ label return_to_castle:
     
     "A vision appears before Link..."
     
-    show zelda child at center
+    show zelda child at midcenter
     
     zelda "Link... if you're seeing this, then I've failed to protect Hyrule."
     
@@ -1619,7 +1632,7 @@ label temple_of_time_first:
     scene bg temple_of_time
     with fade
     
-    play music "audio/temple_of_time_theme.mp3"
+    play music "audio/temple_of_time_theme.mp3" if_changed
     
     show link child
     show navi at naviright
@@ -1647,7 +1660,7 @@ label temple_of_time_first:
     scene bg sacred_realm
     with fade
     
-    play music "audio/master_sword_theme.mp3"
+    play music "audio/master_sword_theme.mp3" if_changed
     
     show link child
     
@@ -1695,7 +1708,7 @@ label temple_of_time_first:
     scene bg sacred_realm
     with fade
     
-    show rauru at center
+    show rauru at midcenter
     
     rauru "I am Rauru, one of the Seven Sages. Welcome to the Sacred Realm."
     
@@ -1732,7 +1745,7 @@ label awakening_adult:
     scene bg temple_of_time
     with fade
     
-    play music "audio/temple_of_time_theme.mp3"
+    play music "audio/temple_of_time_theme.mp3" if_changed
     
     show link adult
     with dissolve
@@ -1756,7 +1769,7 @@ label hyrule_field_adult:
     scene bg hyrule_field
     with fade
     
-    play music "audio/hyrule_field_theme.mp3"
+    play music "audio/hyrule_field_theme.mp3" if_changed
     
     show link adult
     
@@ -1767,8 +1780,11 @@ label hyrule_field_adult:
     navi "Link... Hyrule has changed so much. It's covered in darkness!"
     
     link "This is what Ganondorf has done... We have to stop him!"
-    
-    show sheik_sprite at center
+
+    show link adult at midleft
+    with dissolve
+
+    show sheik_sprite at midcenter
     with dissolve
     
     play sound "audio/warp_in.mp3"
@@ -1817,30 +1833,47 @@ label hyrule_field_adult:
     jump adult_temple_hub
 
 label adult_temple_hub:
-    scene bg hyrule_field
-    show link adult
-    show navi at naviright
-    
-    menu:
-        navi "Which temple should we tackle first, Link?"
+    if (has_forest_medallion and has_fire_medallion and has_water_medallion):
+        navi "Link! We've awakened the first three Sages! We need to find the Shadow and Spirit Temples next!"
+        jump adult_temple_hub_2
+    else:
+        scene bg hyrule_field
+        show link adult at midleft
+        with dissolve
+        show navi at naviright
         
-        "Forest Temple":
-            navi "Back to the forest! Let's awaken the Forest Sage!"
-            jump forest_temple_approach
+        menu:
+            navi "Which temple should we tackle first, Link?"
             
-        "Fire Temple":
-            navi "Death Mountain it is! To the Fire Temple!"
-            jump fire_temple_approach
-            
-        "Water Temple":
-            navi "Lake Hylia and the Water Temple await!"
-            jump water_temple_approach
+            "Forest Temple":
+                if not has_forest_medallion:
+                    navi "Back to the forest! Let's awaken the Forest Sage!"
+                    jump forest_temple_approach
+                else:
+                    navi "We already have the Forest Medallion! Let's choose another temple."
+                    jump adult_temple_hub
+                
+            "Fire Temple":
+                if not has_fire_medallion:
+                    navi "Death Mountain it is! To the Fire Temple!"
+                    jump fire_temple_approach
+                else:
+                    navi "We already have the Fire Medallion! Let's choose another temple."
+                    jump adult_temple_hub
+                
+            "Water Temple":
+                if not has_water_medallion:
+                    navi "Lake Hylia and the Water Temple await!"
+                    jump water_temple_approach
+                else:
+                    navi "We already have the Water Medallion! Let's choose another temple."
+                    jump adult_temple_hub
 
 label forest_temple_approach:
     scene bg kokiri_forest
     with fade
     
-    play music "audio/kokiri_forest_theme.mp3"
+    play music "audio/kokiri_forest_theme.mp3" if_changed
     
     show link adult
     
@@ -1859,7 +1892,7 @@ label forest_temple_approach:
     scene bg forest_temple
     with fade
     
-    play music "audio/forest_temple_theme.mp3"
+    play music "audio/forest_temple_theme.mp3" if_changed
     
     "An ancient temple stands before him, covered in vines and darkness..."
     
@@ -1909,7 +1942,7 @@ label boss_phantom_ganon:
     scene bg forest_temple
     with fade
     
-    play music "audio/boss_battle.mp3"
+    play music "audio/boss_battle.mp3" if_changed
     
     show phantom_ganon
     with dissolve
@@ -2014,7 +2047,7 @@ label phantom_ganon_defeated:
     show saria_sprite at midright
     with dissolve
     
-    play music "audio/saria_song.mp3"
+    play music "audio/saria_song.mp3" if_changed
     
     saria "Link... you did it. You saved the forest."
     
@@ -2046,33 +2079,43 @@ label phantom_ganon_defeated:
     scene bg black
     with fade
     
-    jump adult_temple_hub_2
+    jump adult_temple_hub
 
 label adult_temple_hub_2:
     scene bg hyrule_field
     show link adult
     show navi at naviright
+
+    play music "audio/hyrule_field_theme.mp3" if_changed
     
+    if has_shadow_medallion or has_spirit_medallion:
+        navi "Link! just 1 Sage left. We can do this!"
+
     menu:
-        navi "One Sage down! Where to next?"
-        
-        "Fire Temple":
-            navi "Let's head to Death Mountain!"
-            jump fire_temple_approach
-            
-        "Water Temple":
-            navi "To Lake Hylia!"
-            jump water_temple_approach
-            
+        navi "Where to next?"
+
         "Shadow Temple":
-            navi "Kakariko Village, here we come!"
-            jump shadow_temple_approach
+            if not has_shadow_medallion:
+                navi "Kakariko Village and the Shadow Temple next!"
+                jump shadow_temple_approach
+            else:
+                navi "We already have the Shadow Medallion! Let's choose another temple."
+                jump adult_temple_hub_2
+
+        "Spirit Temple":
+            if not has_spirit_medallion:
+                navi "The Desert and the Spirit Temple await!"
+                jump spirit_temple_approach
+            else:
+                navi "We already have the Spirit Medallion! Let's choose another temple."
+                jump adult_temple_hub_2
+
 
 label fire_temple_approach:
     scene bg death_mountain
     with fade
     
-    play music "audio/death_mountain_theme.mp3"
+    play music "audio/death_mountain_theme.mp3" if_changed
     
     show link adult
     
@@ -2085,7 +2128,7 @@ label fire_temple_approach:
     scene bg goron_city
     with fade
     
-    play music "audio/death_mountain_theme.mp3"
+    play music "audio/death_mountain_theme.mp3" if_changed
     
     show link adult
     
@@ -2106,7 +2149,7 @@ label fire_temple_approach:
     scene bg fire_temple
     with fade
     
-    play music "audio/fire_temple_theme.mp3"
+    play music "audio/fire_temple_theme.mp3" if_changed
     
     show link adult
     show navi at naviright
@@ -2157,7 +2200,7 @@ label boss_volvagia:
     scene bg fire_temple
     with fade
     
-    play music "audio/boss_battle.mp3"
+    play music "audio/boss_battle.mp3" if_changed
     
     "The ground shakes! A massive dragon emerges from the lava!"
     
@@ -2241,7 +2284,7 @@ label volvagia_defeated:
     show darunia_sprite at midright
     with dissolve
     
-    play music "audio/death_mountain_theme.mp3"
+    play music "audio/death_mountain_theme.mp3" if_changed
     
     darunia "Brother! You came for me!"
     
@@ -2269,33 +2312,14 @@ label volvagia_defeated:
     scene bg black
     with fade
     
-    jump adult_temple_hub_3
+    jump adult_temple_hub
 
-label adult_temple_hub_3:
-    scene bg hyrule_field
-    show link adult
-    show navi at naviright
-    
-    menu:
-        navi "Two Sages awakened! Three more to go!"
-        
-        "Water Temple":
-            navi "Time to dive into the Water Temple!"
-            jump water_temple_approach
-            
-        "Shadow Temple":
-            navi "To Kakariko Village!"
-            jump shadow_temple_approach
-            
-        "Spirit Temple":
-            navi "The desert awaits us!"
-            jump spirit_temple_approach
 
 label water_temple_approach:
     scene bg lake_hylia
     with fade
     
-    play music "audio/hyrule_field_morning.mp3"
+    play music "audio/hyrule_field_morning.mp3" if_changed
     
     show link adult
     
@@ -2304,8 +2328,11 @@ label water_temple_approach:
     show navi at naviright
     
     navi "The lake is almost dry! Something's wrong at the Water Temple!"
-    
-    show sheik_sprite at center
+
+    show link adult at midleft
+    with dissolve
+
+    show sheik_sprite at midcenter
     with dissolve
     
     play sound "audio/warp_in.mp3"
@@ -2332,7 +2359,7 @@ label water_temple_approach:
     scene bg water_temple
     with fade
     
-    play music "audio/water_temple_theme.mp3"
+    play music "audio/water_temple_theme.mp3" if_changed
     
     show link adult
     show navi at naviright
@@ -2385,7 +2412,7 @@ label boss_morpha:
     scene bg water_temple
     with fade
     
-    play music "audio/boss_battle.mp3"
+    play music "audio/boss_battle.mp3" if_changed
     
     "The water in the chamber ripples ominously..."
     
@@ -2469,7 +2496,7 @@ label morpha_defeated:
     show ruto_sprite at midright
     with dissolve
     
-    play music "audio/zora_domain_theme.mp3"
+    play music "audio/zora_domain_theme.mp3" if_changed
     
     ruto "Link... you came back. Just like you promised."
     
@@ -2501,29 +2528,13 @@ label morpha_defeated:
     scene bg black
     with fade
     
-    jump adult_temple_hub_4
-
-label adult_temple_hub_4:
-    scene bg hyrule_field
-    show link adult
-    show navi at naviright
-    
-    menu:
-        navi "Three down, two to go! We're getting close!"
-        
-        "Shadow Temple":
-            navi "Let's head to Kakariko Village!"
-            jump shadow_temple_approach
-            
-        "Spirit Temple":
-            navi "To the desert!"
-            jump spirit_temple_approach
+    jump adult_temple_hub
 
 label shadow_temple_approach:
     scene bg kakariko_village
     with fade
     
-    play music "audio/kakariko_theme.mp3"
+    play music "audio/kakariko_theme.mp3" if_changed
     
     show link adult
     
@@ -2534,8 +2545,11 @@ label shadow_temple_approach:
     navi "Link! The village is under attack!"
     
     "Link defends the village from the monsters..."
+
+    show link adult at midleft
+    with dissolve
     
-    show sheik_sprite at center
+    show sheik_sprite at midcenter
     with dissolve
     
     play sound "audio/warp_in.mp3"
@@ -2557,7 +2571,7 @@ label shadow_temple_approach:
     
     play sound "audio/warp_out.mp3"
     
-    show impa_sprite at center
+    show impa_sprite at midcenter
     with dissolve
     
     impa "Link... it's been seven years. You've grown strong."
@@ -2575,7 +2589,7 @@ label shadow_temple_approach:
     scene bg shadow_temple
     with fade
     
-    play music "audio/shadow_temple_theme.mp3"
+    play music "audio/shadow_temple_theme.mp3" if_changed
     
     show link adult
     show navi at naviright
@@ -2626,7 +2640,7 @@ label boss_bongo_bongo:
     scene bg shadow_temple
     with fade
     
-    play music "audio/boss_battle.mp3"
+    play music "audio/boss_battle.mp3" if_changed
     
     "A giant drum beats in the darkness!"
     
@@ -2737,8 +2751,10 @@ label bongo_defeated:
     show impa_sprite at midright
     with dissolve
     
-    play music "audio/zelda_theme.mp3"
+    play music "audio/zelda_theme.mp3" if_changed
     
+    hide navi
+
     impa "Link. You have done well. The Shadow Temple is cleansed."
     
     link "Impa! I'm glad you're safe!"
@@ -2767,13 +2783,13 @@ label bongo_defeated:
     scene bg black
     with fade
     
-    jump spirit_temple_approach
+    jump adult_temple_hub_2
 
 label spirit_temple_approach:
     scene bg hyrule_field
     with fade
     
-    play music "audio/gerudo_valley_theme.mp3"
+    play music "audio/gerudo_valley_theme.mp3" if_changed
     
     show link adult
     show navi at naviright
@@ -2785,7 +2801,7 @@ label spirit_temple_approach:
     scene bg spirit_temple
     with fade
     
-    play music "audio/spirit_temple_theme.mp3"
+    play music "audio/spirit_temple_theme.mp3" if_changed
     
     show link adult
     
@@ -2795,7 +2811,10 @@ label spirit_temple_approach:
     
     navi "The Spirit Temple! But look—it has areas only a child can enter!"
     
-    show sheik_sprite at center
+    show link adult at midleft
+    with dissolve
+
+    show sheik_sprite at midcenter
     with dissolve
     
     play sound "audio/warp_in.mp3"
@@ -2861,7 +2880,7 @@ label boss_twinrova:
     scene bg spirit_temple
     with fade
     
-    play music "audio/boss_battle.mp3"
+    play music "audio/boss_battle.mp3" if_changed
     
     show twinrova
     with dissolve
@@ -2893,7 +2912,7 @@ label twinrova_battle:
             "Link reflects the fire magic with his Mirror Shield!"
             "The fire magic hits the ice witch!"
             play sound "audio/enemy_hit.mp3"
-            show twinrova at shakes
+            show twinrova at shake
             "The ice witch recoils in pain!"
             
             "After enough hits, the witches combine into one being!"
@@ -2970,6 +2989,9 @@ label twinrova_defeated:
     "A pillar of orange light appears..."
     
     "A mysterious figure appears in the light..."
+
+    show nabooru at midcenter
+    with dissolve
     
     nabooru "Link... thank you for freeing me from the Twinrova's control."
     
@@ -2982,7 +3004,7 @@ label twinrova_defeated:
     "Nabooru awakens as the Sage of Spirit!"
     
     call item_get("Spirit Medallion", "item_spirit_medallion")
-    $ has_spirit_medallion = Trues
+    $ has_spirit_medallion = True
     
     nabooru "All six Sages are now awakened, Link. It's time to face Ganondorf!"
     
@@ -2999,11 +3021,13 @@ label all_sages_gathered:
     scene bg temple_of_time
     with fade
     
-    play music "audio/temple_of_time_theme.mp3"
+    play music "audio/temple_of_time_theme.mp3" if_changed
     
-    show link adult
+    show link adult at midleft
+    with dissolve
     
-    show rauru at center
+    show rauru at midright
+    with dissolve
     
     rauru "Link. You have done it. All six Sages have been awakened."
     
@@ -3042,7 +3066,7 @@ label ganon_castle_approach:
     scene bg ganon_castle
     with fade
     
-    play music "audio/ganon_castle_theme.mp3"
+    play music "audio/ganon_castle_theme.mp3" if_changed
     
     show link adult
     show navi at naviright
@@ -3077,9 +3101,9 @@ label ganon_castle_approach:
     scene bg throne_room
     with fade
     
-    play music "audio/ganondorf_theme.mp3"
+    play music "audio/ganondorf_theme.mp3" if_changed
     
-    show ganondorf_sprite at center
+    show ganondorf_sprite
     with dissolve
     
     ganondorf "Well, well... The boy who tried to stop me seven years ago. Look at you now."
@@ -3115,10 +3139,10 @@ label ganon_castle_approach:
     
     "A blinding light surrounds Sheik..."
     
-    play music "audio/zelda_theme.mp3"
+    play music "audio/zelda_theme.mp3" if_changed
     
     hide sheik_sprite
-    show zelda child at midright
+    show zelda adult at midright
     with dissolve
     
     zelda "Link... I'm sorry for deceiving you."
@@ -3141,11 +3165,11 @@ label final_boss_ganondorf:
     scene bg throne_room
     with fade
     
-    play music "audio/ganondorf_battle.mp3"
+    play music "audio/ganondorf_battle.mp3" if_changed
     
     show ganondorf_sprite
     show link adult at midleft
-    show zelda child at midright
+    show zelda adult at midright
     
     zelda "I'll create openings for you, Link! Watch for my signals!"
     
@@ -3157,7 +3181,7 @@ label ganondorf_battle:
     if ganon_health <= 0:
         jump ganondorf_defeated
     
-    show ganondorf_sprite at center
+    show ganondorf_sprite
     
     "Ganondorf floats in the air, hurling dark energy spheres!"
     
@@ -3229,7 +3253,7 @@ label ganondorf_defeated:
     hide ganondorf_sprite
     
     show link adult at midleft
-    show zelda child at midright
+    show zelda adult at midright
     
     zelda "We did it, Link! Ganondorf is defeated!"
     
@@ -3241,7 +3265,7 @@ label ganondorf_defeated:
     
     "The power of the Six Sages begins to seal Ganondorf..."
     
-    show ganondorf_sprite at center
+    show ganondorf_sprite
     with dissolve
     
     ganondorf "You... you think this is over?!"
@@ -3262,13 +3286,13 @@ label ganondorf_defeated:
     jump castle_escape
 
 label castle_escape:
-    play music "audio/escape_theme.mp3"
+    play music "audio/escape_theme.mp3" if_changed
     
     scene bg ganon_castle
     with fade
     
     show link adult
-    show zelda child at midright
+    show zelda adult at midright
     
     zelda "Run, Link! This way!"
     
@@ -3284,7 +3308,7 @@ label castle_escape:
     with fade
     
     show link adult at midleft
-    show zelda child at midright
+    show zelda adult at midright
     
     link "We made it..."
     
@@ -3303,7 +3327,7 @@ label castle_escape:
     scene bg black
     with fade
     
-    play music "audio/ganondorf_theme.mp3"
+    play music "audio/ganondorf_theme.mp3" if_changed
     
     ganondorf "YOU... HAVE NOT... WON!"
     
@@ -3316,7 +3340,7 @@ label castle_escape:
     "A massive beast emerges from the ruins—Ganon, the Demon King!"
     
     show link adult at midleft
-    show zelda child at midright
+    show zelda adult at midright
     
     zelda "He's transformed into Ganon! His true form!"
     
@@ -3338,7 +3362,7 @@ label final_boss_ganon:
     scene bg hyrule_field
     with fade
     
-    play music "audio/ganondorf_battle.mp3"
+    play music "audio/ganondorf_battle.mp3" if_changed
     
     show ganon
     show link adult at midleft
@@ -3425,7 +3449,7 @@ label ganon_final_defeated:
     "Ganon falls to his knees, weakened!"
     
     show link adult at midleft
-    show zelda child at midright
+    show zelda adult at midright
     
     zelda "Now, Link! Deliver the final blow!"
     
@@ -3465,10 +3489,10 @@ label ending:
     scene bg hyrule_field
     with fade
     
-    play music "audio/zelda_theme.mp3"
+    play music "audio/zelda_theme.mp3" if_changed
     
     show link adult at midleft
-    show zelda child at midright
+    show zelda adult at midright
     
     "The darkness lifts from Hyrule. The sun shines brightly once more."
     
@@ -3539,7 +3563,7 @@ label ending:
     with fade
     
     show link child at midleft
-    show zelda child at midright
+    show zelda adult at midright
     
     "Link rushes to see Princess Zelda..."
     
@@ -3568,16 +3592,17 @@ label ending:
     scene bg kokiri_forest
     with fade
     
-    play music "audio/kokiri_forest_theme.mp3"
+    play music "audio/kokiri_forest_theme.mp3" if_changed
     
-    show link child
+    show link child at midleft
+    with dissolve
     show navi at naviright
     
     navi "Link, what will you do now?"
     
     link "I don't know, Navi. I feel like I've lived a lifetime, but I'm still just a kid."
     
-    show saria_sprite at midright
+    show saria_sprite at midcenter
     with dissolve
     
     saria "Link! There you are! I've been looking for you!"
@@ -3601,13 +3626,7 @@ label ending:
     scene bg black
     with fade
     
-    play music "audio/credits_theme.mp3"
-    
-    show expression VBox(
-        Text("The Legend of Zelda: Ocarina of Time", size=60, xalign=0.5),
-        Text("Visual Novel Edition", size=36, xalign=0.5),
-        spacing=20
-    ) at truecenter with dissolve
+    play music "audio/credits_theme.mp3" if_changed
 
     "Link's journey through time saved Hyrule from darkness."
     
@@ -3621,6 +3640,10 @@ label ending:
     
     "A tale of courage, wisdom, and power..."
     
-    centered "{size=+8}THE END{/size}"
+    show expression VBox(
+        Text("The Legend of Zelda: Ocarina of Time", size=60, xalign=0.5),
+        Text("Visual Novel Edition", size=36, xalign=0.5),
+        spacing=20
+    ) at truecenter with dissolve
     
     return
