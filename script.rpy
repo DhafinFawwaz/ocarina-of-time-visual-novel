@@ -42,6 +42,7 @@ image kaepora = Transform("kaepora/kaepora.webp", xalign=0.5, yalign=0.5, zoom=0
 
 # Backgrounds
 image bg kokiri_forest = Transform("backgrounds/kokiri_forest.jpg", fit="cover")
+image bg kokiri_shop = Transform("backgrounds/kokiri_shop.webp", fit="cover")
 image bg link_house = Transform("backgrounds/link_house.png", fit="cover")
 image bg deku_tree_meadow = Transform("backgrounds/deku_tree_meadow.png", fit="cover")
 image bg deku_tree_inside = Transform("backgrounds/deku_tree_inside.jpg", fit="cover")
@@ -196,7 +197,7 @@ label start:
     with fade
     
     show navi
-    play sound "audio/navi_hello.mp3"
+    play sound "sound/navi_hello.mp3"
     
     navi "Link! Wake up! Link!"
     
@@ -333,7 +334,7 @@ label get_shield:
     
     navi "You can buy a Deku Shield from the shop in the village. Let's go!"
     
-    scene bg black
+    scene bg kokiri_shop
     with fade
     
     "Link visits the Kokiri Shop..."
@@ -539,14 +540,15 @@ label gohma_battle:
     menu:
         "Use sword":
             link "Take this!"
-            play sound "audio/sword_slash.mp3"
+            play sound "sound/sword_slash.wav"
             "Link slashes at Gohma, but his sword bounces off her hard carapace!"
             navi "That didn't work! Try something else!"
             jump gohma_battle
             
         "Use slingshot":
             link "Let's try the slingshot!"
-            play sound "audio/slingshot.mp3"
+            play sound "sound/slingshot.wav"
+            show gohma at shake
             "Link shoots a seed directly into Gohma's eye!"
             play sound "audio/enemy_hit.mp3"
             "Gohma reels back in pain and falls to the ground, stunned!"
@@ -556,7 +558,7 @@ label gohma_battle:
                 
                 "Strike with sword":
                     link "Now's my chance!"
-                    play sound "audio/sword_slash.mp3"
+                    play sound "sound/sword_slash.wav"
                     show gohma at shake
                     "Link rushes forward and slashes at Gohma's vulnerable eye!"
                     $ gohma_health -= 1
@@ -1113,7 +1115,7 @@ label dodongo_battle:
         
         "Use sword":
             link "I'll attack him directly!"
-            play sound "audio/sword_slash.mp3"
+            play sound "sound/sword_slash.wav"
             "Link slashes at King Dodongo, but his thick hide deflects the blade!"
             navi "His skin is too tough! Try something else!"
             jump dodongo_battle
@@ -1124,13 +1126,15 @@ label dodongo_battle:
             "Link throws a bomb into King Dodongo's open mouth!"
             play sound "audio/explosion.mp3"
             "The bomb explodes inside King Dodongo! He falls to the ground, stunned!"
-            
+            show king_dodongo at shake
+
             menu:
                 navi "Quick! Attack while he's down!"
                 
                 "Strike with sword":
-                    play sound "audio/sword_slash.mp3"
+                    play sound "sound/sword_slash.wav"
                     "Link attacks King Dodongo's exposed belly repeatedly!"
+                    show king_dodongo at shake
                     $ dodongo_health -= 1
                     
                     if dodongo_health > 0:
@@ -1364,7 +1368,7 @@ label barinade_battle:
     
     menu:
         "Use sword on jellyfish":
-            play sound "audio/sword_slash.mp3"
+            play sound "sound/sword_slash.wav"
             "Link cuts down the Bari jellyfish protecting Barinade!"
             "Barinade's core is exposed!"
             
@@ -1376,14 +1380,16 @@ label barinade_battle:
                     "Link throws the boomerang at Barinade's body!"
                     play sound "audio/enemy_hit.mp3"
                     "Barinade is stunned!"
+                    show barinade at shake
                     
                     menu:
                         navi "Attack with your sword!"
                         
                         "Strike with sword":
-                            play sound "audio/sword_slash.mp3"
+                            play sound "sound/sword_slash.wav"
                             "Link slashes at Barinade repeatedly!"
                             $ barinade_health -= 1
+                            show barinade at shake
                             
                             if barinade_health > 0:
                                 play sound "audio/enemy_hurt.mp3"
@@ -1403,7 +1409,7 @@ label barinade_battle:
                     jump barinade_battle
                     
         "Attack Barinade directly":
-            play sound "audio/sword_slash.mp3"
+            play sound "sound/sword_slash.wav"
             "The jellyfish block Link's attack!"
             navi "Take out the jellyfish first!"
             jump barinade_battle
@@ -1896,6 +1902,7 @@ label phantom_ganon_battle:
             "Link shoots an arrow at Phantom Ganon as he emerges!"
             play sound "audio/enemy_hit.mp3"
             "Direct hit! Phantom Ganon falls from his horse!"
+            show phantom_ganon at shake
             
             "Phantom Ganon begins firing energy balls!"
             
@@ -1903,13 +1910,14 @@ label phantom_ganon_battle:
                 navi "Deflect his magic back at him!"
                 
                 "Swing sword at energy ball":
-                    play sound "audio/sword_slash.mp3"
+                    play sound "sound/sword_slash.wav"
                     "Link deflects the energy ball!"
                     "Phantom Ganon hits it back!"
                     "Link deflects it again!"
                     play sound "audio/enemy_hit.mp3"
                     "The energy ball strikes Phantom Ganon!"
                     $ phantom_ganon_health -= 1
+                    show phantom_ganon at shake
                     
                     if phantom_ganon_health > 0:
                         play sound "audio/enemy_hurt.mp3"
@@ -1925,7 +1933,7 @@ label phantom_ganon_battle:
                     jump phantom_ganon_battle
                     
         "Use sword":
-            play sound "audio/sword_slash.mp3"
+            play sound "sound/sword_slash.wav"
             "Link swings but Phantom Ganon is too far away!"
             navi "Use your bow!"
             if phantom_ganon_battle_ganon_health > 0:
@@ -1942,7 +1950,7 @@ label phantom_ganon_battle:
             jump phantom_ganon_battle
                     
         "Use sword":
-            play sound "audio/sword_slash.mp3"
+            play sound "sound/sword_slash.wav"
             "Link swings but Phantom Ganon is too far away!"
             navi "Use your bow!"
             jump phantom_ganon_battle
@@ -2136,7 +2144,7 @@ label volvagia_battle:
         
         "Use sword":
             link "I'll strike her!"
-            play sound "audio/sword_slash.mp3"
+            play sound "sound/sword_slash.wav"
             "Link slashes at Volvagia, but she flies out of reach!"
             navi "Wait for her to come out of the holes!"
             jump volvagia_battle
@@ -2146,15 +2154,17 @@ label volvagia_battle:
             play sound "audio/hammer_smash.mp3"
             "Link slams the Megaton Hammer on Volvagia's head!"
             play sound "audio/enemy_hit.mp3"
+            show volvagia at shake
             "Volvagia crashes to the ground, stunned!"
             
             menu:
                 navi "Attack while she's down!"
                 
                 "Strike with sword":
-                    play sound "audio/sword_slash.mp3"
+                    play sound "sound/sword_slash.wav"
                     "Link slashes repeatedly at Volvagia's vulnerable body!"
                     $ volvagia_health -= 1
+                    show volvagia at shake
                     
                     if volvagia_health > 0:
                         play sound "audio/enemy_hurt.mp3"
@@ -2363,15 +2373,17 @@ label morpha_battle:
             play sound "audio/longshot.mp3"
             "Link shoots the Longshot at the nucleus!"
             play sound "audio/grab.mp3"
+            show morpha at shake
             "Got it! Link pulls the nucleus out of the water!"
             
             menu:
                 navi "Attack it now!"
                 
                 "Strike with sword":
-                    play sound "audio/sword_slash.mp3"
+                    play sound "sound/sword_slash.wav"
                     "Link slashes at the vulnerable nucleus!"
                     $ morpha_health -= 1
+                    show morpha at shake
                     
                     if morpha_health > 0:
                         play sound "audio/enemy_hurt.mp3"
@@ -2387,7 +2399,7 @@ label morpha_battle:
                     jump morpha_battle
                     
         "Use sword":
-            play sound "audio/sword_slash.mp3"
+            play sound "sound/sword_slash.wav"
             "Link's sword can't reach the nucleus in the water!"
             navi "Use the Longshot!"
             jump morpha_battle
@@ -2608,6 +2620,7 @@ label bongo_battle:
                     "Then shoots the other hand!"
                     play sound "audio/enemy_hit.mp3"
                     "Bongo Bongo's eye is exposed!"
+                    show bongo_bongo at shake
                     
                     menu:
                         navi "Shoot the eye!"
@@ -2617,14 +2630,16 @@ label bongo_battle:
                             "Link shoots an arrow directly into the eye!"
                             play sound "audio/enemy_hit.mp3"
                             "Bongo Bongo falls to the platform, stunned!"
+                            show bongo_bongo at shake
                             
                             menu:
                                 navi "Attack with your sword!"
                                 
                                 "Strike with sword":
-                                    play sound "audio/sword_slash.mp3"
+                                    play sound "sound/sword_slash.wav"
                                     "Link slashes at Bongo Bongo!"
                                     $ bongo_health -= 1
+                                    show bongo_bongo at shake
                                     
                                     if bongo_health > 0:
                                         play sound "audio/enemy_hurt.mp3"
@@ -2649,7 +2664,7 @@ label bongo_battle:
                     jump bongo_battle
                     
         "Attack blindly":
-            play sound "audio/sword_slash.mp3"
+            play sound "sound/sword_slash.wav"
             "Link swings at nothing!"
             navi "Use the Eye of Truth to see it!"
             jump bongo_battle
@@ -2828,6 +2843,7 @@ label twinrova_battle:
             "Link reflects the fire magic with his Mirror Shield!"
             "The fire magic hits the ice witch!"
             play sound "audio/enemy_hit.mp3"
+            show twinrova at shakes
             "The ice witch recoils in pain!"
             
             "After enough hits, the witches combine into one being!"
@@ -2841,15 +2857,17 @@ label twinrova_battle:
                     play sound "audio/magic_release.mp3"
                     "The magic fires back at Twinrova!"
                     play sound "audio/enemy_hit.mp3"
+                    show twinrova at shake
                     "Direct hit! Twinrova crashes to the ground!"
                     
                     menu:
                         navi "Strike with your sword!"
                         
                         "Attack with sword":
-                            play sound "audio/sword_slash.mp3"
+                            play sound "sound/sword_slash.wav"
                             "Link slashes at the fallen Twinrova!"
                             $ twinrova_health -= 1
+                            show twinrova at shake
                             
                             if twinrova_health > 0:
                                 play sound "audio/enemy_hurt.mp3"
@@ -2869,6 +2887,7 @@ label twinrova_battle:
                     play sound "audio/enemy_hit.mp3"
                     "It works the same way!"
                     $ twinrova_health -= 1
+                    show twinrova at shake
                     
                     if twinrova_health > 0:
                         navi "[twinrova_health] more!"
@@ -2877,7 +2896,7 @@ label twinrova_battle:
                         jump twinrova_defeated
                         
         "Attack directly":
-            play sound "audio/sword_slash.mp3"
+            play sound "sound/sword_slash.wav"
             "Link can't reach the flying witches!"
             navi "Use the Mirror Shield!"
             jump twinrova_battle
@@ -3093,12 +3112,13 @@ label ganondorf_battle:
         zelda "Reflect his magic, Link!"
         
         "Reflect with sword":
-            play sound "audio/sword_slash.mp3"
+            play sound "sound/sword_slash.wav"
             "Link deflects the dark energy ball back at Ganondorf!"
             "Ganondorf deflects it back!"
             "Link deflects it again!"
             play sound "audio/enemy_hit.mp3"
             "The energy hits Ganondorf!"
+            show ganondorf_sprite at shake
             
             zelda "Now! While he's stunned!"
             
@@ -3108,14 +3128,16 @@ label ganondorf_battle:
                     "Link fires a Light Arrow at Ganondorf!"
                     play sound "audio/enemy_hit.mp3"
                     "Direct hit! Ganondorf falls to the ground!"
+                    show ganondorf_sprite at shake
                     
                     menu:
                         zelda "Strike with your sword!"
                         
                         "Attack with Master Sword":
-                            play sound "audio/sword_slash.mp3"
+                            play sound "sound/sword_slash.wav"
                             "Link rushes forward and slashes at Ganondorf!"
                             $ ganon_health -= 1
+                            show ganondorf_sprite at shake
                             
                             if ganon_health > 0:
                                 play sound "audio/enemy_hurt.mp3"
@@ -3138,7 +3160,7 @@ label ganondorf_battle:
                     jump ganondorf_battle
                     
         "Attack directly":
-            play sound "audio/sword_slash.mp3"
+            play sound "sound/sword_slash.wav"
             "Link can't reach the floating Ganondorf!"
             zelda "Reflect his magic first!"
             jump ganondorf_battle
@@ -3299,6 +3321,7 @@ label ganon_battle:
                     play sound "audio/enemy_hit.mp3"
                     "Ganon roars in pain!"
                     $ ganon_health -= 1
+                    show ganon at shake
                     
                     if ganon_health == 2:
                         zelda "Link! The Master Sword! I'll make an opening!"
@@ -3320,6 +3343,7 @@ label ganon_battle:
                     play sound "audio/enemy_hit.mp3"
                     "Ganon is stunned!"
                     $ ganon_health -= 1
+                    show ganon at shake
                     
                     if ganon_health > 0:
                         navi "[ganon_health] more!"
@@ -3334,7 +3358,7 @@ label ganon_battle:
             jump ganon_battle
             
         "Attack head-on":
-            play sound "audio/sword_slash.mp3"
+            play sound "sound/sword_slash.wav"
             "Ganon's armor deflects the attack!"
             navi "Get behind him!"
             jump ganon_battle
